@@ -51,6 +51,7 @@ import {FilterPipe} from './angular/pipes/filter.pipe';
     ComponentTemplatesComponent
   ],
   imports: [
+
     HttpClientModule,
     BrowserModule,
     FormsModule,
