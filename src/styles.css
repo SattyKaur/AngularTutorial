@@ -1,1 +1,90 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import "~@fortawesome/fontawesome-free/css/all.css";
+@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+
+.b1 {
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.b2 {
+  float: right;
+  margin: 10px;
+}
+
+em {
+  float: left; color: #E05C65; padding-left: 10px;
+}
+
+.title {
+  color: #B44C11;
+  font-weight: bold;
+  font-size: 50px;
+  text-align: center;
+}
+
+.subtitle {
+  color: #B44C11;
+}
+
+label {
+  font-weight: bold;
+}
+
+.box {
+  margin-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 30px;
+  width: 90%;
+}
+
+.borderBox {
+  border-style: solid;
+  border-width: 1px;
+  border-color: red;
+  margin-bottom: 10px;
+  margin-left: 10px;
+}
+
+.router-link-active.router-link-active.router-link-active.router-link-active {
+  color: #B44C11;
+  font-weight: bold;
+}
+
+.clickable {
+  cursor: pointer;
+  color: #4183c4;
+}
+
+mark {
+  background-color: #FFFBF9;
+  font-weight: bold;
+  color: black;
+}
+
+.diagram {
+  margin: 5px;
+  display: inline-block;
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+}
+
+pre {
+  padding: 5px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #ffaaaa;
+  background-color: #FFFBF9;
+}
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

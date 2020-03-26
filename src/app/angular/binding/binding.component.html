@@ -1,0 +1,178 @@
+<h2 class="subtitle">Data Binding</h2>
+<div>
+    <p>Binding to data from components or styles and attributes to DOM elements.</p>
+    <ul class="clickable">
+        <li (click)="scroll(interpolation)">Interpolation</li>
+        <li (click)="scroll(propertyBinding)">Property Binding</li>
+        <li (click)="scroll(eventBinding)">Event Binding</li>
+        <li (click)="scroll(twoWayBinding)">Two-way Data Binding</li>
+        <li (click)="scroll(classBinding)">Class Binding</li>
+        <li (click)="scroll(attributeBinding)">Attribute Binding</li>
+    </ul>
+</div>
+<hr>
+
+
+<!--INTERPOLATION-->
+<div>
+<h4 #interpolation class="subtitle">Interpolation</h4>
+<p>Prints value of a property from the component</p>
+<pre>
+    <em>component.ts</em>
+    title = "My Project";
+
+    <em>component.html</em>
+    &lt;h1&gt; <mark>{{ "{{ title }\}" }}</mark> &lt;/h1&gt;</pre>
+</div>
+<hr>
+
+
+<!--PROPERTY BINDING-->
+<div>
+<h4 #propertyBinding class="subtitle">Property Binding</h4>
+<p>Binding fields from the component to HTML properties</p>
+<pre>
+    <em>component.ts</em>
+    isDisabled: boolean = true;
+
+    <em>component.html</em>
+    &lt;button <mark>[disabled]="isDisabled"</mark>&gt; Button has been Disabled! &lt;/button&gt;</pre>
+</div>
+<hr>
+
+
+<!--EVENT BINDING-->
+<div>
+<h4 #eventBinding class="subtitle">Event Binding</h4>
+<p>When a specific DOM event happens (e.g. click, change, keyUp), calls the related method in the component.
+    Use the $event in the parameters to access information on the event object, E.g. the x, y position of the mouse.</p>
+<pre>
+    <em>component.html</em>
+    &lt;button <mark>(click)=&quot;myClickFunction($event)&quot;</mark>&gt;Click me&lt;/button&gt;
+
+    <em>component.ts</em>
+    <mark>myClickFunction(event)</mark>{{'{'}}
+    alert('Button was clicked');
+     console.log(event);
+    {{'}'}}
+    </pre>
+
+<h4 class="subtitle">Event Filtering</h4>
+<p>When we want to trigger an event when a particular key is pressed, E.g enter or tab key.</p>
+
+<pre>
+    <em>component.html</em>
+    &lt;input placeholder=&quot;Enter Text&quot; <mark>(keyup.enter)=&quot;keyPressed()&quot;</mark> /&gt;</pre>
+</div>
+<hr>
+
+
+<!--TWO WAY BINDING-->
+<div>
+<h4 #twoWayBinding class="subtitle">Two-way Binding</h4>
+<p>Where we bind to a field from our component but can also update that field from our view.
+    We use the [(ngModel)] property, need to import FormsModule to use it. </p>
+<pre>
+    <em>component.html</em>
+    &lt;input <mark>[(ngModel)]=&quot;input&quot;</mark> (keyup.enter)=&quot;keyPressed()&quot;/&gt;
+
+    <em>component.ts</em>
+    title: string = 'Title';
+    input: string = 'Enter New Title...';
+
+    keyPressed() {{'{'}}
+      this.title = this.input;
+    {{'}'}}
+    </pre>
+
+<h6>{{title}}</h6>
+<label for="example"></label><input id ="example" [(ngModel)]="input" (keyup.enter)="keyPressed()"/>
+
+</div>
+<hr>
+
+
+<!--CLASS BINDING-->
+<div>
+<h4 #classBinding class="subtitle">Class Binding</h4>
+<p>Angular provides different ways to add/remove classes to and from elements:</p>
+<ol>
+    <li><h6 class="subtitle">class="":</h6>
+        <p>Apply class to your element from a library, e.g. bootstrap or use class="" to add a custom CSS styling class. </p>
+        <pre> &lt;button<mark>class="btn btn-primary"</mark>&gt;Save&lt;/button&gt;</pre>
+        </li>
+
+    <li><h6 class="subtitle">[class.]:</h6>
+        <p>Apply a class depending on the value of a field in the component. If true it will apply the class, if false it will remove it</p>
+        <pre>
+            <em>component.ts</em>
+    isActive: boolean = false;
+
+            <em>component.html</em>
+    &lt;button<mark>[class.btn-primary]=&quot;isActive&quot;</mark>&gt;Save&lt;/button&gt;</pre></li>
+
+
+    <li><h6 class="subtitle">[ngClass]:</h6>
+        <p>NgClass is a attribute directive that allows you to adds or removes CSS classes dynamically by using conditional expressions</p>
+        <pre>
+            <em>component.ts</em>
+    answer: boolean = true;
+
+            <em>component.html</em>
+    &lt;div <mark>[ngClass]=&quot;answer? 'red' : 'green'&quot;</mark>&gt;Your answer is: {{"{{answer}\}"}}&lt;/div&gt;
+
+            <em>component.css</em>
+    .green {{'{'}} colour: green {{'}'}}
+    .red {{'{'}} colour: red {{'}'}}
+        </pre>
+    </li>
+
+    <li><h6 class="subtitle">[ngStyle]:</h6>
+        <p>ngStyle is directive that where we can add multiple style classes using object literals</p>
+        <pre>
+             <em>component.ts</em>
+    answer: boolean = true;
+
+    <mark>answerStyle()</mark> {{'{'}}
+            if (this.answer)
+              return {{'{'}}colour: 'green'{{ '}'}}
+            else
+              return {{'{'}}colour: 'red'{{ '}'}}
+             <em>component.html</em>
+    &lt;div <mark>[ngClass]=&quot;answerStyle()&quot;</mark>&gt;Your answer is: {{"{{answer}\}"}}&lt;/div&gt;
+        </pre>
+        <div [ngStyle]="answerStyle()">Your answer is: {{answer}}</div>
+    </li>
+</ol>
+
+</div>
+<hr>
+
+<!--ATTRIBUTE BINDING-->
+<div>
+<h4 #attributeBinding class="subtitle">Attribute Binding</h4>
+<p>Attribute binding is useful when we dont have a property to bind to on the DOM html element. For example the colspan DOM property is not a property of the td element,
+    therefore we need to prefix the property with 'attr.'</p>
+
+<pre>
+    <em>component.html</em>
+    &lt;td <mark>[attr.colspan] =&quot;2&quot;</mark>&gt;Colspan 2 &lt;/td&gt;</pre>
+
+<table>
+    <tr>
+        <th> Column 1 </th>
+        <th> Column 2 </th>
+        <th> Column 3 </th>
+    </tr>
+    <tr>
+        <td [attr.colspan]="2">Colspan 2 </td>
+    </tr>
+</table>
+</div>
+<br>
+
+<hr>
+
+<button (click)="next()" class="btn btn-outline-info b2">Input & Output <i class="fa fa-arrow-right"></i></button>
+<button (click)="top()" class="btn btn-outline-info b2"><i class="fa fa-arrow-up"></i></button>
+<button (click)="previous()" class="btn btn-outline-info b2"><i class="fa fa-arrow-left"></i> Components</button>

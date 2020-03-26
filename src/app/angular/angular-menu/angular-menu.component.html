@@ -1,0 +1,59 @@
+<div class="container">
+  <div>
+    <h1 class="title">Angular Concepts</h1>
+  </div>
+  <hr>
+  <div>
+    <div class="menuButton">
+      <a (click)="menuToggle = !menuToggle">
+        <i class="fa fa-bars"></i> Menu
+      </a>
+    </div>
+    <div class="row">
+      <div *ngIf="menuToggle" class="col-md-2">
+        <ul class="nav flex-column" aria-orientation="vertical">
+          <li class="nav-item pill-1">
+            <a class="nav-link" [routerLink]="['components-templates']" routerLinkActive="active">Components</a>
+          </li>
+          <li class="nav-item pill-1">
+            <a class="nav-link" [routerLink]="['binding']" routerLinkActive="active">Binding</a>
+          </li>
+          <li class="nav-item pill-1">
+            <a class="nav-link" [routerLink]="['input-properties']" routerLinkActive="active">Input & Output</a>
+          </li>
+          <li class="nav-item pill-1">
+            <a class="nav-link" [routerLink]="['directives']" routerLinkActive="active">Directives</a>
+          </li>
+          <li class="nav-item pill-1">
+            <a class="nav-link" [routerLink]="['services']" routerLinkActive="active">Services</a>
+          </li>
+          <li class="nav-item pill-1">
+            <a class="nav-link" [routerLink]="['pipes']" routerLinkActive="active">Pipes</a>
+          </li>
+          <li class="nav-item pill-1">
+            <a class="nav-link" [routerLink]="['forms']" routerLinkActive="active">Forms</a>
+          </li>
+          <li class="nav-item pill-1">
+            <a class="nav-link" [routerLink]="['routing']" routerLinkActive="active">Routing</a>
+          </li>
+          <li class="nav-item pill-1">
+            <a class="nav-link" [routerLink]="['modules']" routerLinkActive="active">Modules</a>
+          </li>
+
+        </ul>
+      </div>
+      <div class="col-md-10 content">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+  <div>
+    <p>Developed by Satty Kaur</p>
+    <p>Email: sattyKaur35@gmail.com</p>
+    <p><a href="https://github.com/SattyKaur">github.com/SattyKaur</a></p>
+  </div>
+
+
+</div>
+
+<!--[style.visibility]="menuToggle ? 'visible' : 'hidden'"-->

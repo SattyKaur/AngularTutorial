@@ -1,0 +1,465 @@
+<h2 class="subtitle">Forms</h2>
+
+<p>It is common for applications to use forms to enable user input. Any input from the user is usually mapped to a model
+    of an data object,
+    for this example we will create a simple user info model, the form will have the same input fields. </p>
+<p>In this section we will look at the two different approaches for creating forms, validation, as well as Form Arrays
+    and form builders. </p>
+<ul class="clickable">
+    <li (click)="scroll(templateDrivenForms)">Template-Driven Forms</li>
+    <li (click)="scroll(reactiveForms)">Reactive Forms</li>
+    <li (click)="scroll(validation)">Validation</li>
+    <li (click)="scroll(customValidation)">Custom Validation</li>
+    <li (click)="scroll(formBuilder)">Form builder</li>
+</ul>
+
+
+<!--TEMPLATE DRIVEN FORMS-->
+<div>
+    <h4 #templateDrivenForms class="subtitle">Template Driven Forms</h4>
+    <p>Template driven forms are created from the html using directives
+        <mark>(ngModel, ngGroup, and ngForm)</mark>
+        . Template driven
+        forms are good for simple forms and validation, however less flexible and not customisable.
+    </p>
+    <p>To use all the features of forms we need to import the FormsModule in your module.</p>
+
+    <p>Next we can begin to build our form. Below we have a basic HTML form, we have some bootstrap styling but we
+        haven't yet used any of
+        the directives we mentioned above.</p>
+    <pre>
+    <em>component.html</em>
+    &lt;form&gt;
+      &lt;div class=&quot;form-group&quot;&gt;
+            &lt;label&gt;First Name&lt;/label&gt;
+            &lt;input type=&quot;text&quot; class=&quot;form-control&quot;&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;form-group&quot;&gt;
+            &lt;label&gt;Age&lt;/label&gt;
+            &lt;input type=&quot;text&quot; class=&quot;form-control&quot;&gt;
+        &lt;/div&gt;
+        &lt;button type=&quot;submit&quot;&gt;Submit&lt;/button&gt;
+    &lt;/form&gt;
+</pre>
+
+    <br>
+
+    <h5 class="subtitle">ngForm</h5>
+    <p>The first directive is ngForm. This directive allows us access to two different things: </p>
+    <ol>
+        <li>Form field values</li>
+        <li>Valid / Invalid status</li>
+    </ol>
+    <p>We can add this directive to the form tag and give it a reference label, the label now references the entire
+        form</p>
+    <pre>
+     <em>component.html</em>
+    &lt;form <mark>#userForm="ngForm"</mark>&gt;
+      .....
+    &lt;/form&gt;
+</pre>
+
+    <h5 class="subtitle">(ngSubmit)</h5>
+    <p>The submit button inside the form will trigger the ngSubmit directive, this event triggers the onSubmit method in
+        the component,
+        we can pass in the form values by referencing the form label we assigned above. We can also disable the button
+        if any of the fields are invalid</p>
+    <pre>
+    <em>component.html</em>
+    &lt;form #userForm="ngForm" <mark>(ngSubmit)="onSubmit(userForm.values)"</mark>&gt;
+      .....
+        &lt;button <mark>[disable]="userForm.invalid"</mark> type=&quot;submit&quot;&gt;Submit&lt;/button&gt;
+    &lt;/form&gt;
+
+    <em>component.ts</em>
+    onSubmit(value: any) {{'{'}}
+        console.log(value);
+    }
+</pre>
+
+    <h5 class="subtitle">ngModel & name</h5>
+    <p>Next we need to annotate each input fields with ngModel directive and name attribute to let angular know they
+        belong to this ngForm. The name attribute assign
+        a key to the input value.</p>
+    <pre>
+    <em>component.html</em>
+    &lt;form&gt;
+      &lt;div class=&quot;form-group&quot;&gt;
+            &lt;label&gt;First Name&lt;/label&gt;
+            &lt;input <mark>name="firstName" ngModel</mark> type=&quot;text&quot; class=&quot;form-control&quot;&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;form-group&quot;&gt;
+            &lt;label&gt;Age&lt;/label&gt;
+            &lt;input <mark>name="firstName" ngModel</mark> type=&quot;text&quot; class=&quot;form-control&quot;&gt;
+        &lt;/div&gt;
+        &lt;button [disable]="userForm.invalid" type=&quot;submit&quot;&gt;Submit&lt;/button&gt;
+    &lt;/form&gt;
+</pre>
+
+    <h5 class="subtitle">ngModelGroup</h5>
+    <p>If we want the following data structure then we simply put the location input fields in a surrounding div with
+        the following directive: ngModelGroup="address"
+    </p>
+    <pre>
+    <em>UserDetailModel.ts</em>
+    UserDetails {{'{'}}
+        name: string,
+        age: number,
+        address {{'{'}}
+        street: string,
+            city: string,
+            postCode: string
+        }
+    }
+    <em>component.html</em>
+     &lt;form&gt;
+        .....
+            &lt;div <mark>ngModelGroup=&quot;address&quot;</mark>&gt;
+               .....
+            &lt;/div&gt;
+        &lt;button type=&quot;submit&quot;&gt;Submit&lt;/button&gt;
+    &lt;/form&gt;
+</pre>
+
+    <h5 class="subtitle">Data Binding</h5>
+    <p>If we want our form to be pre-filled or to update values, then we can use data binding or two way data
+        binding</p>
+    <pre>
+    <em>component.ts</em>
+    myName: string = 'Satty';
+
+    <em>component.html</em>
+     &lt;form&gt;
+      &lt;div class=&quot;form-group&quot;&gt;
+            &lt;label&gt;First Name&lt;/label&gt;
+    &lt;input name="firstName" <mark>[(ngModel)]="myName"</mark> type=&quot;text&quot; class=&quot;form-control&quot;&gt;
+        &lt;/div&gt;
+        .....
+     &lt;/form&gt;
+</pre>
+
+    <div class="container">
+        <form #f="ngForm" (ngSubmit)="submit(f.value)">
+            <div class="form-group col-md-7">
+                <label for="name">First Name</label>
+                <input id="name" name="name" ngModel required type="text" class="form-control">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="age">Age</label>
+                <input id="age" name="age" ngModel type="text" required class="form-control">
+            </div>
+            <!--        <div ngModelGroup="adress">-->
+            <!--            <div class="form-group col-md-7">-->
+            <!--                <label for="street">Street</label>-->
+            <!--                <input id="street" name="street" ngModel required type="text" class="form-control">-->
+            <!--            </div>-->
+            <!--            <div class="form-group col-md-4">-->
+            <!--                <label for="city">City</label>-->
+            <!--                <input id="city" name="city" ngModel type="text" required class="form-control">-->
+            <!--            </div>-->
+            <!--            <div class="form-group col-md-4">-->
+            <!--                <label for="postcode">Postcode</label>-->
+            <!--                <input id="postcode" name="postcode" ngModel type="text" required class="form-control">-->
+            <!--            </div>-->
+            <!--        </div>-->
+            <button type="submit" [disabled]="f.invalid" class="btn btn-sm btn-info">Submit</button>
+        </form>
+    </div>
+
+</div>
+<hr>
+
+
+<!--REACTIVE FORMS-->
+<div>
+    <h4 #reactiveForms class="subtitle">Reactive Forms</h4>
+    <p>Reactive forms are created from inside the component using the FormControl and FormGroup class. Reactive forms
+        allows us more flexibility and control over the custom validation and it is easier to unit test.
+        We first need to import 'ReactiveFormsModule' into our module imports. </p>
+
+    <p>Next inside the component we create a new instance of FormGroup, give it a name that represents the form.</p>
+    <pre>
+        <em>LoginComponent.ts</em>
+        export class LoginComponent {{'{'}}
+        loginForm = <mark>new FormGroup();</mark>
+        }
+    </pre>
+    <p>The FormGroup takes some arguments. This is where we list our FormControls, each FormControl represents a input
+        field in the html. This example is a login page that asks for a username and password input.</p>
+    <pre>
+         <em>LoginComponent.ts</em>
+        loginForm = new FormGroup({{'{'}}
+        <mark>username: new FormControl(),</mark>
+            <mark>password: new FormControl()</mark>
+        )}
+    </pre>
+    <p>The FormControl class takes in 3 optional parameters: </p>
+    <ol>
+        <li>Form State: This is whether we want the input field pre-populated with a value. We use '' if we want it
+            empty.
+        </li>
+        <li>Validator or an array of Validators[ ]: You can use built in validators, or custom ones.</li>
+        <li>Async Validators: Validation functions that return an Observable or Promise.</li>
+    </ol>
+    <p>For this example we will give it a blank state and use the built in required validator.</p>
+    <pre>
+        <em>LoginComponent.ts</em>
+        loginForm = new FormGroup({{'{'}}
+        username: new FormControl<mark>('', Validators.required)</mark>,
+            password: new FormControl<mark>('', Validators.required)</mark>
+        )}
+    </pre>
+    <p>Next we create the form in the html template. We use the directives
+        [ngFormGroup] and formControlName to reference the properties in the component, the names must match.</p>
+    <pre>
+        <em>LoginComponent.html</em>
+    &lt;form <mark>[ngFormGroup]=&quot;loginForm&quot;</mark>&gt;
+        &lt;div class=&quot;form-group&quot;&gt;
+          &lt;label&gt;Username&lt;/label&gt;
+          &lt;input <mark>formControlName=&quot;username&quot; </mark>class=&quot;form-control&quot; type=&quot;text&quot;&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;form-group&quot;&gt;
+          &lt;label&gt;Password&lt;/label&gt;
+          &lt;input <mark>formControlName=&quot;password&quot;</mark> class=&quot;form-control&quot; type=&quot;password&quot;&gt;
+        &lt;/div&gt;
+    &lt;/form&gt;
+    </pre>
+
+    <p>We can add a button inside the form, disable form is invalid, and add the (ngSubmit) method like we did
+        before.</p>
+    <pre>
+        <em>LoginComponent.html</em>
+    &lt;form [ngFormGroup]=&quot;loginForm&quot;  <mark>(ngSubmit)=login(loginForm.value)</mark>&gt;
+        ....
+        &lt;button type=&quot;submit&quot; <mark>[disabled]=&quot;loginForm.invalid&quot;</mark>&gt;Login&lt;/button&gt;
+    &lt;/form&gt;
+        <em>LoginComponent.ts</em>
+        login(value) {{'{'}}
+        console.log(value)
+        }
+    </pre>
+</div>
+<hr>
+<br>
+
+
+<!--VALIDATION-->
+<div>
+    <h4 #validation class="subtitle">Validation</h4>
+    <p>Some input fields may require validation, such as required or min length. Below are examples of how to do use
+        built in validations for both
+        template driven forms and reactive forms. You can also see from the examples how to show error messages
+        depending on the validation error. </p>
+    <br>
+    <h5 class="subtitle">Template Driven Validation</h5>
+    <p>First we need to add a reference variable to the input field. Also here we have use the required validation, this
+        is a built
+        in validation from the angular/forms module. </p>
+    <pre>
+        <em>component.html</em>
+    &lt;form #f=&quot;ngForm&quot; (ngSubmit)=&quot;submit(f.value)&quot;&gt;
+        &lt;div class=&quot;form-group col-md-7&quot;&gt;
+            &lt;label for=&quot;name&quot;&gt;First Name&lt;/label&gt;
+            &lt;input id=&quot;name&quot; name=&quot;name&quot; ngModel <mark>#name="ngModel" required</mark>
+            type=&quot;text&quot; class=&quot;form-control&quot;&gt;
+        &lt;/div&gt;
+    &lt;/form&gt;
+    </pre>
+
+    <p>Next we want to add a error message to let the user know what is the problem.</p>
+    <pre>
+        <em>component.html</em>
+        .....
+            &lt;input id=&quot;name&quot; name=&quot;name&quot; ngModel #name="ngModel" required
+            type=&quot;text&quot; class=&quot;form-control&quot;&gt;
+            &lt;div <mark>*ngIf=name.invalid &amp;&amp; (name.dirty || name.touched)&quot;</mark>
+            class=&quot;alert alert-danger&quot;&gt;Required&lt;/div&gt;
+    </pre>
+
+    <form #f="ngForm" (ngSubmit)="submit(f.value)">
+        <div class="form-group col-md-7">
+            <label for="fName">First Name</label>
+            <input id="fName" name="name" ngModel required #name="ngModel" type="text" class="form-control">
+            <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">Required</div>
+        </div>
+        <button type="submit" [disabled]="f.invalid" class="btn btn-sm btn-info">Submit</button>
+    </form>
+
+    <br>
+
+    <h5 class="subtitle">Reactive Form Validation</h5>
+    <p>We declare what validation we want in our component inside our FormControl objects. For our password field we
+        have two validation checks:
+        required and minLength. Multiple validations are declared in an array.</p>
+
+    <pre>
+        <em>LoginComponent.ts</em>
+        loginForm = new FormGroup({{'{'}}
+        username: new FormControl<mark>('', Validators.required)</mark>,
+        password: new FormControl<mark>('', [Validators.required, Validators.minLength(8)])</mark>
+        )}
+    </pre>
+
+    <p>We also need to create getter methods for the FormControls, this allows us to reference the fields when we add
+        the error messages in the html. </p>
+    <pre>
+        <em>LoginComponent.ts</em>
+        get username() {{'{'}}return this.loginForm.get('username')}
+        get password() {{'{'}}return this.loginForm.get('password')}
+    </pre>
+
+    <p>Next in our html we add error messages if the fields are invalid. We also show how to display specific error
+        messages if a field has multiple validations.</p>
+
+    <pre>
+        <em>LoginComponent.html</em>
+    ......
+    &lt;div <mark>*ngIf=&quot;username.invalid &amp;&amp; (username.dirty || username.touched)&quot;</mark>
+      class=&quot;alert alert-danger&quot;&gt;Required&lt;/div&gt;
+    ......
+    &lt;div *ngIf=&quot;password.invalid &amp;&amp; (password.dirty || password.touched)&quot; class=&quot;alert alert-danger&quot;&gt;
+      &lt;div <mark>*ngIf=&quot;password.errors.minlength&quot;</mark>&gt;Password must be at least 8 characters long.&lt;/div&gt;
+      &lt;div <mark>*ngIf=&quot;password.errors.required&quot;</mark>&gt;Required&lt;/div&gt;
+     &lt;/div&gt;
+    </pre>
+
+    <form [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)">
+        <div class="form-group col-md-6">
+            <label for="username">Username</label>
+            <input id="username" formControlName="username" class="form-control" type="text">
+            <div class="alert alert-danger" *ngIf="username.touched && !username.valid">
+                <div *ngIf="username.errors.required">Required</div>
+                <div *ngIf="username.errors.emailDomain">Email must contain domain 'sabintech.com'</div>
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="password">Password</label>
+            <input id="password" formControlName="password" class="form-control" type="password">
+            <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger">
+                <div *ngIf="password.errors.minlength">Password must be at least 8 characters long.</div>
+                <div *ngIf="password.errors.required">Required</div>
+            </div>
+        </div>
+        <button type="submit" [disabled]="loginForm.invalid" class="btn btn-sm btn-info">Login</button>
+    </form>
+
+</div>
+<hr>
+
+
+<!--CUSTOM VALIDATION-->
+<div>
+    <h4 #customValidation class="subtitle">Custom Validation</h4>
+    <p>In its basic form a custom validation is simply a function that takes a Control object and returns either a null
+        if input is valid or an validation error object. </p>
+    <pre>
+        <em>custom.validator.ts</em>
+        static emailDomain<mark>(control: AbstractControl): ValidationErrors | null</mark>
+        {{'{'}}
+        }
+    </pre>
+    <p>A validation error object is a key value pair. The key is typically a string (name of the custom validation) and
+        value can be of type any. In our example below, we
+        will create an email validator to make sure it contains the right domain name e.g. 'gmail.com' or
+        'hotmail.com'.</p>
+    <p>First we create a variable to hold the input value, we can do that using control.value, next we want to extract
+        the domain, we can do that using substring</p>
+    <pre>
+         <em>custom.validator.ts</em>
+        static emailDomain(control: AbstractControl): ValidationErrors | null {{'{'}}
+        let email = <mark>control.value;</mark>
+            let domain = <mark>email.substring(email.indexOf('@')+1);</mark>
+        }
+    </pre>
+    <p>Next we check if the domain string is equal to our chosen domain, if so return null, else return the error
+        object.
+        The key name of the error is used when you want to display the error message</p>
+    <pre>
+        <em>custom.validator.ts</em>
+        static emailDomain(control: AbstractControl): ValidationErrors | null {{'{'}}
+        let email = control.value;
+            let domain = email.substring()
+            <mark>if (email === '' || domain.toLocaleLowerCase() === 'sabintech.com')</mark>
+        {{'{'}}
+        return null;
+            } else {{'{'}}
+        <mark>return {{'{'}}'emailDomain' : true}</mark>}
+        }
+    </pre>
+    <p>We can add our custom validation to our reactive form in our component to any FormControls we want. We can also
+        add a error message if the domain does not match.</p>
+    <pre>
+         <em>LoginComponent.ts</em>
+        loginForm = new FormGroup({{'{'}}
+        username: new FormControl('', [Validators.required, <mark>CustomValidators.emailDomain])</mark>,
+        password: new FormControl('', [Validators.required, Validators.minLength(8)])
+        )}
+
+        <em>LoginComponent.html</em>
+       &lt;div <mark>*ngIf=&quot;username.errors.emailDomain&quot;</mark>&gt;Domain name must be '@sabintech.com'&lt;/div&gt;
+    </pre>
+
+
+</div>
+<hr>
+
+
+<!--FORM BUILDER-->
+<div>
+    <h4 #formBuilder class="subtitle">Form Builder</h4>
+    <p>To use a form builder we can create forms using a cleaner code. To do this we pass in a Form Builder in the
+        component constructor.</p>
+    <pre>
+        <em>component.ts</em>
+        form: any;
+        constructor(<mark>formBuilder: FormBuilder</mark>){{'{'}} }
+    </pre>
+    <p>Inside the ngOnInit method we can create the form controls using the form builder. We can create a single group
+        or nested groups of form controls.
+        We can add form state and validation inside the [ ] of each form control. </p>
+    <pre>
+        <em>component.ts</em>
+        ngOnInit(){{'{'}}
+        this.form = <mark>this.formBuilder.group</mark>({{'{'}}
+        name: ['', Validation.required],
+                address: this.formBuilder.group({{'{'}}
+        street: [],
+                    city: [],
+                    postcode: []
+                })
+            })
+        }
+    </pre>
+    <!--<form formGroup="newUserForm" class="col-md-6">-->
+    <!--    <div class="form-group">-->
+    <!--        <label>Name</label>-->
+    <!--        <input formControlName="name" type="text" class="form-control">-->
+    <!--        <div class="alert alert-danger" *ngIf="name.touched && !name.valid">-->
+    <!--            Name is required-->
+    <!--        </div>-->
+    <!--    </div>-->
+    <!--    <div formGroupName=“address”>-->
+    <!--        <div class="form-group">-->
+    <!--            <label>Street</label>-->
+    <!--            <input formControlName="street" type="text" class="form-control">-->
+    <!--        </div>-->
+    <!--        <div class="form-group">-->
+    <!--            <label>City</label>-->
+    <!--            <input formControlName="city" type="text" class="form-control">-->
+    <!--        </div>-->
+    <!--        <div class="form-group">-->
+    <!--            <label>Postcode</label>-->
+    <!--            <input formControlName="postcode" type="text" class="form-control">-->
+    <!--        </div>-->
+    <!--    </div>-->
+    <!--</form>-->
+</div>
+
+
+<br>
+<hr>
+
+<button (click)="next()" class="btn btn-outline-info b2">Routing <i class="fa fa-arrow-right"></i></button>
+<button (click)="top()" class="btn btn-outline-info b2"><i class="fa fa-arrow-up"></i></button>
+<button (click)="previous()" class="btn btn-outline-info b2"><i class="fa fa-arrow-left"></i> Pipes</button>
+

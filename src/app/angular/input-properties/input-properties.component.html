@@ -1,0 +1,108 @@
+<h2 class="subtitle">Input & Output Properties</h2>
+<p>@Input() and @Output() are both decorators that allow Angular to share data between parent and child components. Input is used to write to, Output returns a value or event that can be observed.
+</p>
+
+<pre>
+&lt;parent-component&gt;
+    &lt;child-component&gt;&lt;/child-component&gt;
+&lt;/parent-component&gt;
+</pre>
+<hr>
+
+<!--@INPUT()-->
+<div>
+    <h4 class="subtitle">@Input()</h4>
+    <p>- Use the @Input() decorator on a property in the child component, that this lets Angular know this property
+    can receive its value from the parent component.</p>
+    <div>
+        <div class="btn btn-info diagram">Parent</div>
+        <div class="diagram">  ----Data-Flow---->  </div>
+        <div class="btn btn-info diagram">Child</div>
+    </div>
+    <br>
+    <h6>Input Example</h6>
+    <pre>
+        <em>child.component.ts</em>
+    <mark>@Input()</mark> quoteOfTheDay: string;
+
+        <em>child.component.html</em>
+    &lt;div&gt;Today's quote is {{"{{quoteOfTheDay}\}"}} &lt;/div&gt;
+
+        <em>parent.component.ts</em>
+    <mark>currentQuote</mark>: string = 'Be the change you want to see';
+
+        <em>parent.component.html</em>
+    &lt;child-component <mark>[quoteOfTheDay]=&quot;currentQuote&quot;</mark>&gt;&lt;/child-component&gt;
+    </pre>
+
+    <p>- You can give the @Input() decorator an alias name inside the parenthesis, you reference this name in the child component selector.</p>
+    <pre>
+        <em>child.component.ts</em>
+     @Input(<mark>'quote'</mark>) quoteOfTheDay: string;
+
+        <em>parent.component.html</em>
+    &lt;child-component <mark>[quote]</mark>=&quot;currentQuote&quot;&gt;&lt;/child-component&gt;
+    </pre>
+</div>
+<hr>
+
+
+
+<!--@OUTPUT()-->
+<div>
+    <h4 class="subtitle">@Output()</h4>
+    <p>Use the @Output() decorator in the child component to pass data from child to parent. The type of data that gets passed back is typically an event such as a
+        button click, we use EventEmitters to allow the parent to handle the event.</p>
+    <div>
+        <div class="btn btn-info diagram">Parent</div>
+        <div class="diagram">  <----Data-Flow----  </div>
+        <div class="btn btn-info diagram">Child</div>
+    </div>
+    <br>
+    <h6>Output Example</h6>
+    <p>In the child component you should initialize the Output property with an instance of EventEmitter<>() using the new keyword.
+    We also have a method to emit the event to the parent. This method is linked to a button in the child html.</p>
+    <pre>
+        <em>child.component.ts</em>
+    <mark>@Output() newTitleEvent: EventEmitter()&lt;string&gt;</mark>;
+
+
+    changeTitle(value: string) {{'{'}}
+        this.newTitleEvent.<mark>emit(value)</mark>
+     {{'}'}}
+    </pre>
+
+    <p>Here in our child html we have a button which takes the input value and passes it to the method above.</p>
+    <pre>
+        <em>child.component.html</em>
+   &lt;label&gt;Change the Title: &lt;input #newTitle&gt;&lt;/label&gt;
+   &lt;button <mark>(click)=&quot;changeTitle(newTitle.value)&quot;</mark>&gt;Change the parents title&lt;/button&gt;
+
+    </pre>
+
+    <p>Inside our parent component we have a method to handle the event passed on from the child component. Inside our child
+    selector we reference output property in brackets() and link it to the method in here.</p>
+    <pre>
+        <em>parent.component.ts</em>
+    title: string;
+
+    <mark>getNewTitle(newTitle: string)</mark> {{'{'}}
+        this.title = newTitle;
+    {{'}'}}
+        <em>parent.component.html</em>
+        &lt;child-component <mark>(newTitleEvent)=&quot;getNewTitle($event)&quot;</mark>&gt;&lt;/child-component&gt;
+    </pre>
+</div>
+
+<hr>
+
+<div>
+<parent-component></parent-component>
+</div>
+
+<br>
+<hr>
+
+<button (click)="next()" class="btn btn-outline-info b2">Directives <i class="fa fa-arrow-right"></i></button>
+<button (click)="top()" class="btn btn-outline-info b2"><i class="fa fa-arrow-up"></i></button>
+<button (click)="previous()" class="btn btn-outline-info b2"><i class="fa fa-arrow-left"></i> Binding</button>

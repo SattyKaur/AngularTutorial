@@ -1,0 +1,584 @@
+<h2 class="subtitle">Routing & Navigation</h2>
+
+<p>Routing is enabling navigation from one view to another by changing the url path. We can activate a route through a
+    click event or a directive.
+    In this section we will look at how to set-up routing and the various options we have when routing to a path.</p>
+<ul class="clickable">
+    <li (click)="scroll(configActiveRoutes)">Configuring & Activating Routes</li>
+    <li (click)="scroll(routeParams)">Route Parameters</li>
+    <li (click)="scroll(optionalQuery)">Optional & Query Parameters</li>
+    <li (click)="scroll(parentChildRoutes)">Parent / Child Routes</li>
+    <li (click)="scroll(secondaryRoutes)">Secondary Routes</li>
+    <li (click)="scroll(routeGuards)">Route Guards</li>
+    <li (click)="scroll(routeEvents)">Routing Events</li>
+</ul>
+<hr>
+
+
+<!--CONFIGURING & ACTIVATING ROUTES-->
+<div>
+    <h4 #configActiveRoutes class="subtitle">Configuring & Activating Routes</h4>
+    <p>To begin with we need to add a &lt;base&gt; element in our index.html file. This lets Angular know to start our
+        url base path with '/'.</p>
+    <pre>
+        <em>index.html</em>
+    &lt;head&gt;
+        ......
+        <mark>&lt;base href=&quot;/&quot;&gt;</mark>
+    &lt;/head&gt;
+    </pre>
+
+
+    <p>Next we need to add the RouterModule.forRoot() into our module imports array. Inside the parenthesis we can
+        configure an array of route paths.
+        A basic configuration contains a string for the 'path' and a reference to the 'component' template we want to
+        load. </p>
+
+    <p>This example below we ask Angular to navigate to the Home component when we pass in 'home' after the base path -
+        'localhost:4200/home'</p>
+    <pre>
+        <em>app.module.ts</em>
+        .....
+        imports: [
+            <mark>RouterModule.forRoot</mark>([
+                <mark>{{'{'}} path: 'home', component: HomeComponent }</mark>
+            ]
+        ]
+    </pre>
+
+    <p>We can also configure an empty path, and redirect it to the chosen component. The example below redirects an
+        empty path to the Home component.</p>
+
+    <pre>
+        <em>app.module.ts</em>
+        {{'{'}} path: '', redirectTo: 'home', pathMatch: 'full' }
+    </pre>
+
+    <p>We can also include a wildcard path; the router will select this route if the url path does not match any of the
+        paths defined in the configuration. This is useful
+        for displaying 404 pages or for directing to another route. Wildcard's should be placed last in the array of
+        paths, as it checks all the routes above before it loads this one.</p>
+    <pre>
+        <em>app.module.ts</em>
+        {{'{'}} path: **, component: PageNotFoundComponent }
+    </pre>
+
+    <h5 class="subtitle">Activating Routes</h5>
+    <p>To activate a route first we need to create a route outlet. We can do this using the &lt;router-outlet&gt; tag.
+        We place this inside a template where we want to display our routes.
+        Here in our main component, we have a navigation element and below it the router outlet.</p>
+    <pre>
+        <em>app.component.html</em>
+        &lt;nav&gt;
+            ....
+        &lt;/nav&gt;
+        <mark>&lt;router-outlet&gt;&lt;/router-outlet&gt;</mark>
+    </pre>
+    <p>We can activate a route from the html by using the [routerLink] directive. The directive references the path url
+        string. This is normally attached to a link or a button.</p>
+
+    <p>This example we have a link to navigate to the home page. The directive takes the string passed in and tries to
+        match to any paths in the route configuration and loads the related component template. The string always leads
+        with '/' unless it is a child route.</p>
+    <pre>
+        <em>app.component.html</em>
+        &lt;nav&gt;
+            &lt;a <mark>[routerLink]=&quot;['/home']&quot;</mark>&gt;Home&lt;/a&gt;
+        &lt;/nav&gt;
+        &lt;router-outlet&gt;&lt;/router-outlet&gt;
+    </pre>
+
+    <h5 class="subtitle">Activating Routes from the Component</h5>
+    <p>We can also activate routes from inside the component. First we need to import the 'Router' class from
+        angular/router into our constructor. Then inside any method we can call the navigate method and pass
+        in the url string path.</p>
+    <pre>
+        <em>component.ts</em>
+        constructor(<mark>private router: Router</mark>) {{'{'}} }
+
+        cancel() {{'{'}}
+        <mark>this.router.navigate(['/home']);</mark>
+    </pre>
+</div>
+<hr>
+<br>
+
+<!--ROUTE PARAMS-->
+<div>
+    <h4 #routeParams class="subtitle">Route Parameters</h4>
+    <p>Route parameters are used when a component needs data to load the relevant content. For example you can pass the
+        id
+        of a data object to a route so it can load the correct data object with the matching id.</p>
+    <p>To define a route parameter in the configuration we use a colon ':' followed by the name of the parameter.</p>
+    <pre>
+        <em>app.module.ts</em>
+        {{'{'}} path: 'products/<mark>:id</mark>', component: ProductDetailComponent }
+    </pre>
+    <h5 class="subtitle">Activating Route Parameters</h5>
+    <p>To activate a route that has a parameter we simply pass it in the [routerLink] directive.
+        The directive takes an array, notice the first part of the path is a string, the route parameter however is not
+        defined as a string.</p>
+    <pre>
+        <em>product-list.component.html</em>
+        &lt;a [routerLink]=&quot;<mark>['/products', product.id]&quot;</mark>&gt;Product Detail&lt;/a&gt;
+    </pre>
+    <h5 class="subtitle">Reading Route Parameters</h5>
+    <p>Passing the id through the route is the first step, the next step is reading that id from the url path and using
+        that id to load the correct data.</p>
+    <p>We can read route parameters using the class Activated Route. First we need to inject that into the constructor
+        of the component trying to load the data.
+        Next we use the method 'snapshot.paramMap.get()' to get the value. Inside the 'get' method we reference the name
+        of the parameters, this must match what we defined in the configuration.</p>
+    <pre>
+        <em>product-detail.coponent.ts</em>
+        constructor(private <mark>route: ActivatedRoute</mark>) {{'{'}} }
+
+        ngOnInit() {{'{'}}
+        const id = <mark>+this.route.snapshot.paramMap.get('id');</mark>
+            this.getProduct(id);
+        }
+    </pre>
+    <p>We can now use the variable id to get the correct data to load the view, notice that we use '+' sign to cast the
+        string value of the route parameter to a number type.</p>
+
+    <p>We can also use Observables to read the route parameter. The observable method is used when the route parameter
+        can change without navigating to another view.
+        The observable subscribes to any changes and keeps the data up to date. </p>
+    <pre>
+        <em>product-detail.coponent.ts</em>
+        constructor(private route: ActivatedRoute) {{'{'}} }
+
+        <mark>this.route.paramMap.subscribe( params => {{'{'}}</mark>
+            <mark>const id = params.get('id');</mark>
+        });
+    </pre>
+</div>
+<hr>
+<br>
+
+
+<!--OPTIONAL & QUERY PARAMS-->
+<div>
+    <h4 #optionalQuery class="subtitle">Optional Parameters</h4>
+    <p>Optional parameters are used when you have several parameters which can make the url path look very long and
+        confusing, and when the parameters are not required but optional.</p>
+
+    <p>Optional parameters are not defined in the route configuration but in the html or component when activating the
+        route. Optional parameters are defined as key value pairs.
+        Here we are passing back an optional parameters, the key is 'id' and the value is the current product id. </p>
+    <pre>
+        <em>product-detail.component.html</em>
+        &lt;a [routerLink]=&quot;['products', <mark>{{'{'}}productId: product.id}</mark>]&quot;&gt;Return back to Products&lt;/a&gt;
+    </pre>
+    <p>You can read data of optional route parameters the same way as before, except you reference the key name. The url
+        would display the key value pair like so:
+        'localhost:4200/products/
+        <mark>productId=15</mark>
+        '
+    </p>
+    <pre>
+        <em>product-list.component.ts</em>
+        this.route.snapshot.paramMap.get(<mark>'productId'</mark>);
+    </pre>
+    <br>
+    <h4 class="subtitle">Query Parameters</h4>
+    <p>Query parameters are also optional and are used to pass information from one component to another. A good example
+        of when this would be useful is when
+        you navigate back to a search page and you want it to have remembered your search settings or filter
+        options.</p>
+    <p>Like optional parameters, query parameters are defined in the html or component. However they are not defined in
+        the [routerLink] directive but have their own directive called [queryParams].
+        Query parameters are also defined in key value pairs.</p>
+    <pre>
+        <em>product-list.component.html</em>
+        &lt;a [routerLink]=&quot;['products', product.id]&quot; <mark>[queryParams]=&quot;{{'{'}}filterBy : 'size8', colour: 'black'}&quot;</mark>&gt;ProductName&lt;/a&gt;
+    </pre>
+    <p>Here in this example we are passing our filter settings to the product detail page. When we navigate back we want
+        these filter settings to remain and not reset.
+        We need to tell productDetail page to remember these query params, we can do this by using the
+        'queryParamsHandling' directive and set it to preserve.</p>
+    <pre>
+        <em>product-detail.component.html</em>
+        &lt;button [routerLink]=&quot;['products']&quot; <mark>queryParamsHandling=&quot;preserve&quot;</mark>&gt;Back&lt;/button&gt;
+    </pre>
+</div>
+<hr>
+<br>
+
+
+<!--PARENT / CHILD ROUTES-->
+<div>
+    <h4 #parentChildRoutes class="subtitle">Parent Child Routes</h4>
+    <p>We can create nested routes, this helps define a hierarchy to better organize and navigate through application.
+        Child routes work by placing a router-outlet inside a parent route. Child routes are great for displaying tabbed
+        pages, menu's or navigation bars.</p>
+    <p>To define a child route we simple place the &lt;router-outlet&gt; tag inside a template that is displayed through
+        the parent outlet.</p>
+
+    <pre>
+        <em>product-detail.component.html</em>
+        &lt;a [routerLink]=&quot;['/products', <mark>product.id, 'info'</mark>]&quot;&gt;Product Detail&lt;/a&gt;
+        &lt;a [routerLink]=&quot;['/products', <mark>product.id, 'reviews'</mark>]&quot;&gt;Reviews&lt;/a&gt;
+        <mark>&lt;router-outlet&gt;&lt;/router-outlet&gt;</mark>
+    </pre>
+    <p>As you can see, we have two tabs inside the product detail template (parent route). You can toggle between the
+        two tabs which will load the child routes in the router-outlet.
+        To configure a child route we simple add an array of children paths inside the parent route.</p>
+    <pre>
+        <em>module.ts</em>
+        .....
+        imports: [
+            RouterModule.forRoot([
+        {{'{'}} path: '/products/:id', component: ProductDetailComponent,
+                        <mark>children: [</mark>
+                                <mark>{{'{'}} path: '', redirect: 'info', pathMatch: 'full' },</mark>
+                                <mark>{{'{'}} path: 'info', component: ProductInfoComponent },</mark>
+                                <mark>{{'{'}} path: 'reviews', component: ProductReviewComponent },</mark>
+                        ]
+        .....
+    </pre>
+    <h5 class="subtitle">Relative & Absolute Paths</h5>
+    <p>When activating a child route we can use either an absolute path or a relative path. Absolute is where you write
+        the full path including parent route, relative is where you
+        only write the child path without the leading '/' slash.</p>
+    <pre>
+        <em>Absolute path</em>
+        this.router.navigate(['/products', this.product.id, 'info'
+
+        <em>Relative path</em>
+        this.router.navigate(['info'], <mark>{{'{'}}relativeTo: this.route }</mark>);
+    </pre>
+
+
+</div>
+<hr>
+<br>
+
+
+<!--SECONDARY ROUTES-->
+<div>
+    <h4 #secondaryRoutes class=subtitle>Secondary Routes</h4>
+    <p>Secondary routes allow us to display another routable component at the same level as primary routes in the route
+        hierarchy.
+        Secondary routes are used to display multiple outlets, these are great for popup components such as a messaging
+        widget or a shopping basket summary.</p>
+    <h5 class="subtitle">Configure</h5>
+    <p>We configure a secondary route the same way as primary routes, however it has an additional property called
+        outlet, we give it a name.</p>
+    <pre>
+    <em>module.ts</em>
+     .....
+        {{'{'}} path: 'home', component: HomeComponent },
+        {{'{'}} path: 'basket', component: BasketComponent, <mark>outlet: 'popup'</mark> }
+
+</pre>
+    <p>Next we create a router-outlet for this popup route. If this exist in the same hierarchy level as primary routes
+        then we can use
+        bootstrap class container and row to have two router outlets side by side. The secondary router-outlet tag has a
+        name property same as that names in the configuration</p>
+
+    <pre>
+    <em>app.component.html</em>
+     &lt;nav&gt;
+        &lt;a [routerLink]=&quot;['/home']&quot;&gt;Home&lt;/a&gt;
+        &lt;a class=&quot;nav-link&quot; <MARK>(click)=&quot;showBasket()&quot;</MARK>&gt;Basket&lt;/a&gt;
+    &lt;/nav&gt;
+
+        &lt;div class=&quot;container&quot;&gt;
+ &lt;div class=&quot;row&quot;&gt;
+   &lt;div class=&quot;col-md-10&quot;&gt;
+     &lt;router-outlet&gt;&lt;/router-outlet&gt;   // PRIMARY OUTLET
+   &lt;/div&gt;
+   &lt;div class=&quot;col-md-2&quot;&gt;
+    <MARK>&lt;router-outlet name=&quot;popup&quot;&gt;&lt;/router-outlet&gt;</MARK>    //SECONDARY OUTLET
+        ...
+</pre>
+
+    <h5 class="subtitle">Activate</h5>
+    <P>In the above example we have a link and a click method to activate the secondary route. Below the nav bar
+        we have the primary outlet and the secondary outlet which has a name property. Below is the click method
+        showBasket() which activates the secondary route. You can also do it using
+        the [routerLink] directive.</P>
+    <pre>
+    <em>app.component.ts</em>
+    showBasket() {{'{'}}
+        this.router.navigate([<mark>{{'{'}}outlet: {{'{'}}popup: ['basket']}}</mark>];
+
+    <em>app.component.html</em>
+    &lt;a [routerLink] = &ldquo;[<mark>{{'{'}}outlet: {{'{'}}popup: [&lsquo;basket&rsquo;]}}</mark>]&rdquo;&gt;Basket&lt;/a&gt;
+</pre>
+
+    <p>The url path with a secondary route looks like this:
+        <mark>localhost:4200/home(popup:basket)</mark>
+    </p>
+
+    <h5 class="subtitle">Clear Secondary Routes</h5>
+    <p>To clear or remove a secondary route we can simple assign null to the outlet name. </p>
+    <pre>
+    <em>app.component.ts</em>
+    closeBasket() {{'{'}}
+        this.router.navigate([<mark>{{'{'}}outlet: {{'{'}}popup: null}}</mark>];
+
+    <em>app.component.html</em>
+    &lt;a [routerLink] = &ldquo;[<mark>{{'{'}}outlet: {{'{'}}popup: null}}</mark>]&rdquo;&gt;Close&lt;/a&gt;
+</pre>
+</div>
+<hr>
+<br>
+
+
+<!--ROUTE GUARDS-->
+<div>
+    <h4 #routeGuards class="subtitle">Route Guards</h4>
+    <p>Route guards are ways of conducting checks before a user navigates to a route. For example it can check if a user
+        is logged in before you can navigate to the user profile page.
+        There are different route guards:</p>
+    <ul>
+        <li>
+            <mark>canActivate:</mark>
+            checks if user is can to navigate to a specific route
+        </li>
+        <li>
+            <mark>canActivateChild:</mark>
+            checks if user can navigate to child route
+        </li>
+        <li>
+            <mark>canDeactivate:</mark>
+            checks if user can navigate away from a route
+        </li>
+        <li>
+            <mark>canLoad:</mark>
+            prevents asynchronous routing
+        </li>
+        <li>
+            <mark>resolve:</mark>
+            Prefetch data before activating the route.
+        </li>
+    </ul>
+
+    <div>
+        <h5 class="subtitle">CanActivate</h5>
+        <p>Route guards are built using services and an Injectable decorator. It implements the canActivate interface
+            which has a method called canActivate() which returns a boolean, if
+            true then user can navigate to route, if false the navigation will be cancelled.
+        </p>
+
+        <pre>
+    <em>auth.guard.ts</em>
+    @Injectable({{'{'}} provideIn: ‘root’})
+
+    export class <mark>AuthGuard</mark> implements CanActivate {{'{'}}
+
+            <mark>canActivate()</mark>: Observable&lt;boolean&gt; || Promise&lt;boolean&gt; || boolean {{'{'}}
+            … }
+</pre>
+        <p>In our example we want to check if a user is logged in before they can navigate to the profile page. Below we
+            use the auth service to check if user is logged in, if yes then
+            they can navigate to the route, if false we direct them to the login page and return false.</p>
+        <pre>
+        <em>auth.guard.ts</em>
+    constructor( private router: ActivatedRoute, private authService: AuthService) {{'{'}} }
+
+    canActivate(): boolean {{'{'}}
+       if (<mark>this.authService.isLoggedIn()</mark>) {{'{'}}
+        return true }
+       this.router.navigate(['/login']);
+        return false;
+    }
+    </pre>
+        <p>Next we need to apply this guard to the routes that need to check if user is logged in. We do this in the
+            route configuration. </p>
+        <pre>
+            <em>module.ts</em>
+    {{'{'}} path: 'profile', component: ProfileComponent, <mark>canActivate: [AuthGuard]</mark> }
+    </pre>
+    </div>
+
+    <div>
+        <h5 class="subtitle">CanActivateChild</h5>
+        <p>The canActivateChild route guard works the same way as the canActivate guard, however this is applied to
+            routes that have children. The service
+            implements the canActivateChild interface and method and returns a boolean. Add the guard to your route
+            configuration.</p>
+        <pre>
+            <em>module.ts</em>
+    {{'{'}} path: 'products:id', component: ProfileComponent, <mark>canActivateChild: ['CanActivateEditProduct'],</mark>
+        children: [
+           {{'{'}} path: 'edit', component: EditProductComponent }
+        ]
+    }
+        </pre>
+    </div>
+
+    <div>
+        <h5 class="subtitle">CanDeactivate</h5>
+        <p>Can activate is used to check if user can navigate away from a route, for example if we want to ask user to save changes before they navigate away from the route.
+        The canDeactivate is created with a service that implements the canDeactivate&lt;T&gt; interface that takes a generic parameters, this is the component that we will use the guard on. </p>
+        <p>In our example we want to check if the user wants to save progress on a form before navigating away. </p>
+        <pre>
+            <em>productEdit.guard.ts</em>
+    @Injectable({{'{'}} provideIn: ‘root’})
+
+    export class ProductEditGuard implements <mark>CanDeactivate&lt;ProductEditComponent&gt;</mark>  {{'{'}}  }
+        </pre>
+        <p>The method canDeactivate can take 4 arguments: </p>
+        <ul>
+            <li><mark>Component&lt;T&gt;:</mark> Creates an instance of the component, this must be the same type declared in class signature.</li>
+            <li><mark>ActivatedRouteSnapshot:</mark> The current rout</li>
+            <li><mark>RouterStateSnapshot:</mark> Current state</li>
+            <li><mark>RouterStateSnapshot:</mark> The next state</li>
+        </ul>
+        <p>For our example we will use the component argument and check the isDirty method from the class, the method will return a observable or promise or simple boolean. </p>
+        <pre>
+            <em>productEdit.guard.ts</em>
+    canDeactivate(component: ProductEditComponent): boolean {{'{'}}
+            if (<mark>component.isDirty</mark>) {{'{'}}
+                <mark>return confirm('Have you saved all your changes?');</mark>
+            }
+            return true
+    }
+            <em>product-edit.component.ts</em>
+    <mark>get isDirty()</mark>: boolean {{'{'}}
+            return JSON.stringify(this.originalProduct) !== JSON.stringify(this.currentProduct);
+    }
+        </pre>
+        <p>The method above checks if the user has made any changes to product, if yes the isDirty method returns true. The canDeactive method
+        then uses the confirm method which displays a pop up message. User can either press ok or cancel. If they hit ok then the confirm method will return true can user can navigate away from the page.
+        If user hits cancel then it returns false and navigation away from route is cancelled.</p>
+        <p>Lastly we need to add the canDeactivate guard to the ProductEdit route configuration. </p>
+        <pre>
+            <em>module.ts</em>
+    {{'{'}} path: 'product/:id/edit', component: ProductEditComponent, <mark>canDeactivate: [ProductEditGuard]</mark> }
+        </pre>
+    </div>
+
+    <div>
+        <h5 class="subtitle">CanLoad</h5>
+        <p>The canLoad guard checks if a feature module can be lazy loaded. In our example we check if the user is logged in, if it is then the module can be lazy-loaded. If
+        it returns false then user will be directed to login page and module will not be loaded, even if it is selected for pre-loading.</p>
+        <pre>
+    @Injectable()
+    export class AuthGuardService <mark>implements CanLoad</mark> {{'{'}}
+    constructor(private authService: AuthService, private router: Router) {{'{'}}
+    }
+    <mark>canLoad(route: Route): boolean </mark>{{'{'}}
+        if (this.authService.isUserLoggedIn()) {{'{'}}
+            return true;
+        }
+        this.router.navigate([ '/login' ]);
+        return false;
+    }
+    }
+        </pre>
+
+        <p>Next we add the canLoad guard to the route configuration. </p>
+        <pre>
+            <em>module.ts</em>
+        {{'{'}}
+            path: 'products/:id',
+            component: ProductDetailComponent,
+            <mark>canLoad: AuthGuardService</mark>
+        }
+        </pre>
+    </div>
+
+    <div>
+        <h5 class="subtitle">Resolve Guard</h5>
+        <p>A resolver allows angular to prefetch data before navigating to a route, this prevents the view partially loading.
+        The first step is to create a route resolver service that implements the Resolve<> interface, we specify the object type of data it should prefetch. In this example we want it to prefetch Products.</p>
+        <pre>
+            <em>product-resolver.service.ts</em>
+    @Injectable({{'{'}}
+        providedIn: 'root'
+            }
+            export class ProductResolverService implements <mark>Resolve&lt;Product&gt;</mark> {{'{'}}
+
+        </pre>
+        <p>We then implement the resolve method which has two parameters; activateRouteSnapshot and routerStateSnapshot. Inside the resolve method we can use the ProductService to fetch the data. The
+        data is returned as a Observable<> of type Product</p>
+        <pre>
+    resolve(): <mark>Observable&lt;Product&gt;</mark> {{'{'}}
+            return this.productService.getProducts();
+            }
+        </pre>
+        <p>You can get access to the current route parameters in your resolver using the activatedRouteSnapshot. Here we use it get a specific product using the route parameter 'id'</p>
+        <pre>
+    resolve(<mark>route: ActivatedRouteSnapshot</mark>): Observable&lt;Product&gt; {{'{'}}
+            return this.productService.<mark>getProduct(route.paramMap.get('id')</mark>;
+            }
+        </pre>
+        <p>Next we need to add the resolver to our route configuration using the resolve property, give it a logical name and then reference the resolver
+            service you created above.</p>
+        <pre>
+    {{'{'}} path: 'products', component: ProductListComponent, <mark>resolve: {{'{'}} products: ProductResolver }</mark> }
+        </pre>
+    </div>
+
+</div>
+<hr>
+<br>
+
+
+<!--ROUTE EVENTS-->
+<div>
+    <h4 #routeEvents class="subtitle">Route Events</h4>
+    <p>Anytime a user navigates through a route, the router generates a series of events. We can tap into these events to monitor or perform logic.
+    These evens include the following: </p>
+    <ul>
+        <li><mark>Navigation Start:</mark>  Triggered by click method, navigation begin. </li>
+        <li><mark>Routes Recognized:</mark>  When a match has been found in the route configuration</li>
+        <li><mark>Navigation End:</mark>  When navigation completes successfully</li>
+        <li><mark>Navigation Cancel:</mark>  When a route has been cancelled by a route guard or redirect</li>
+        <li><mark>Navigation Error:</mark>  When a routing error occurs</li>
+    </ul>
+
+    <p>We can access these events by adding the 'enableTracing' property on the route configuration.</p>
+    <pre>
+        <em>module.ts</em>
+        RouterModule.forRoot([
+            {{'{'}} path: 'home', component: HomeComponent } ],
+            {{'{'}} <mark>enableTracing: true</mark> } )
+    </pre>
+    <p>The angular router has an events property that we can subscribe to, we can then call functions inside the subscribe method. </p>
+    <pre>
+        <em>component.ts</em>
+        constructor(private router: Router) {{'{'}}
+            this.route.<mark>events.subscribe</mark>( (routerEvent: <mark>Event</mark>) => {{'{'}}
+                this.checkRouteEvent(routerEvent);
+            })
+        }
+    </pre>
+    <p>Here we call the checkRouteEvent method, we pass in the Event object from the subscribe function. In this example we want to display a spinner whilst route loads,
+    to do this we change the property 'isLoading' to true when the event is on NavigationStart and to false when the event is on NavigationEnd. We then display the spinner in our
+    HTML depending on the property isLoading.</p>
+
+    <pre>
+        <em>component.ts</em>
+        isLoading = false;
+
+        checkRouterEvent(event: Event) {{'{'}}
+            if (<mark>event instanceof NavigationStart</mark>) {{'{'}}
+                this.isLoading = true;
+            }
+            if (event instanceof <mark>NavigationEnd</mark> || event instanceOf <mark>NavigationCancel</mark> ||
+                event instanceof NavigationError) {{'{'}}
+                    this.isLoading = false;
+            }
+        }
+
+        <em>component.html</em>
+        &lt;span class=&quot;fa fa-spinner spinner&quot; <mark>*ngIf=&quot;isLoading&quot;</mark>&gt;&lt;/span&gt;
+    </pre>
+
+</div>
+<br>
+
+
+<hr>
+
+<button (click)="next()" class="btn btn-outline-info b2">Modules <i class="fa fa-arrow-right"></i></button>
+<button (click)="top()" class="btn btn-outline-info b2"><i class="fa fa-arrow-up"></i></button>
+<button (click)="previous()" class="btn btn-outline-info b2"><i class="fa fa-arrow-left"></i> Forms</button>
+
+
+
