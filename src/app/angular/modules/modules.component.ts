@@ -13,15 +13,16 @@ export class ModulesComponent implements OnInit {
   ngOnInit() {
   }
 
+  scroll(el: HTMLElement) {
+    el.scrollIntoView();
+  }
 
-  previous() {
+
+  previous(el: HTMLElement) {
     this.router.navigate(['angular/routing']);
-    window.scrollTo(0, 0);
+    el.scrollIntoView();
   }
 
-  top() {
-    window.scrollTo(0, 0);
-  }
 
 
 }

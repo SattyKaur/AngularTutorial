@@ -4,6 +4,10 @@ import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
+import {MatMenuModule} from '@angular/material/menu';
+import {MatButtonModule} from '@angular/material/button';
+import {MatTabsModule} from '@angular/material/tabs';
+
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import {PageNotFoundComponent} from './page-not-found.component';
@@ -24,6 +28,10 @@ import { RoutingComponent } from './angular/routing/routing.component';
 import { ModulesComponent } from './angular/modules/modules.component';
 import { ComponentTemplatesComponent } from './angular/component-templates/component-templates.component';
 import {FilterPipe} from './angular/pipes/filter.pipe';
+import {ScrollingModule} from '@angular/cdk/scrolling';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatRippleModule} from '@angular/material/core';
+
 
 
 
@@ -51,13 +59,18 @@ import {FilterPipe} from './angular/pipes/filter.pipe';
     ComponentTemplatesComponent
   ],
   imports: [
-
+    MatRippleModule,
+    MatMenuModule,
     HttpClientModule,
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    MatButtonModule,
+    MatTabsModule,
+    ScrollingModule,
+    MatToolbarModule
   ],
   providers: [
     HttpClient,

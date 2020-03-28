@@ -1,4 +1,4 @@
-<h2 class="subtitle">Directives</h2>
+<h2 #top class="subtitle">Directives</h2>
 <p>Directives are functions that can alter the behaviour, appearance and the structure of your html.
     Angular provides a number of built in directives for structure, forms and routing or you can create our own custom directives.
 </p>
@@ -16,7 +16,7 @@
 <div>
 <h4 #ngIf class="subtitle">NgIf</h4>
 <p>NgIf allows you to show or hide an html element which is bound to a property or a method that returns a boolean.</p>
-<pre>
+<pre class="col-md-10">
     <em>component.ts</em>
     toggleDisplay: boolean = true;
 
@@ -27,7 +27,7 @@
 <p>We can also use other keywords such as 'then' and 'else' tell angular which template we want to show depending on a condition.
 In this example we are using ngTemplate and ngFor which are also directives</p>
 
-<pre>
+<pre class="col-md-10">
     <em>component.ts</em>
   basket [];
 
@@ -54,7 +54,7 @@ In this example we are using ngTemplate and ngFor which are also directives</p>
 <h4 #ngSwitch class="subtitle">NgSwitch</h4>
 <p>NgSwitch is a structural directive that adds or removes templates when it matches the switch expression. The expressions to match
 are provided in the ngSwitchCase directive. If there are no matches then the ngSwitchDefault directive is rendered. </p>
-<pre>
+<pre class="col-md-10">
     <em>component.ts</em>
   dietSelected: string = 'veg';
 
@@ -77,7 +77,7 @@ are provided in the ngSwitchCase directive. If there are no matches then the ngS
     There are also other local variables that we can use such as 'index' which prints the iteration count, 'first' and 'last' which
 return booleans to indicate if item is first or last, likewise with 'odd' and 'even'. </p>
 
-<pre>
+<pre class="col-md-10">
     <em>component.ts</em>
  basket: string[];
  constructor() {{'{'}}
@@ -97,7 +97,7 @@ return booleans to indicate if item is first or last, likewise with 'odd' and 'e
 <p>NgContent allows us to build reusable components without having to hardcode the content. For example if we had a
 bootstrap card component we can use the ng-content selector inside to indicate that the content will be provided when the component template is rendered.
 If we have multiple ng-content selectors then we can give them an id.</p>
-<pre>
+<pre class="col-md-10">
     <em>card.component.html</em>
  &lt;div class=&quot;card&quot;&gt;
   &lt;div class=&quot;card-header&quot;&gt;
@@ -128,7 +128,7 @@ If we have multiple ng-content selectors then we can give them an id.</p>
 <div>
 <h4 #customDirective class="subtitle">Custom Directives</h4>
 <p>Custom attribute directives can be created to apply visual changes to a element. Generate a directive file in the CLI with the following command, this will generate a file that looks like so:</p>
-<pre>
+<pre class="col-md-10">
     <mark>ng generate directive highlight-directive</mark>
 
     <em>highlight-directive.ts</em>
@@ -143,7 +143,7 @@ If we have multiple ng-content selectors then we can give them an id.</p>
     {{'}'}}
 </pre>
 <p>To apply a directive to a DOM element we need to inject ElementRef into the constructor</p>
-<pre>
+<pre class="col-md-10">
     constructor(<mark>private el: ElementRef</mark>) {{'{'}} {{'}'}}
     {{'}'}}
 </pre>
@@ -151,7 +151,7 @@ If we have multiple ng-content selectors then we can give them an id.</p>
 <p>Now that we have reference to the element we can apply changes or styling. In this example we will use @HostListener to apply the colour yellow when the user
 mouses over the element</p>
 
-<pre>
+<pre class="col-md-10">
   @HostListener('mouseenter') onMouseEnter() {{'{'}}
     <mark>this.highlight('yellow');</mark>
   }
@@ -166,7 +166,7 @@ mouses over the element</p>
 </pre>
 
 <p>We can make this directive even more dynamic so we dont have to hard code the colour, by making the colour an input property</p>
-<pre>
+<pre class="col-md-10">
     <em>highlight.directive.ts</em>
   <mark>@Input() colour: string;</mark>.
 
@@ -176,7 +176,7 @@ mouses over the element</p>
 </pre>
 
 <p>We can now use the directive on any element like so:</p>
-<pre>
+<pre class="col-md-10">
     <em>component.html</em>
     &lt;div <mark>highlightDirective [colour]=&quot;pink&quot;</mark>&gt;&lt;/div&gt;
     &lt;div <mark>highlightDirective [colour]=&quot;cyan&quot;</mark>&gt;&lt;/div&gt;
@@ -191,6 +191,6 @@ mouses over the element</p>
 <br>
 <hr>
 
-<button (click)="next()" class="btn btn-outline-info b2">Services <i class="fa fa-arrow-right"></i></button>
-<button (click)="top()" class="btn btn-outline-info b2"><i class="fa fa-arrow-up"></i></button>
-<button (click)="previous()" class="btn btn-outline-info b2"><i class="fa fa-arrow-left"></i> Input & Output</button>
+<button (click)="next(top)" class="btn btn-outline-info b2">Services <i class="fa fa-arrow-right"></i></button>
+<button (click)="scroll(top)" class="btn btn-outline-info b2"><i class="fa fa-arrow-up"></i></button>
+<button (click)="previous(top)" class="btn btn-outline-info b2"><i class="fa fa-arrow-left"></i> Input & Output</button>

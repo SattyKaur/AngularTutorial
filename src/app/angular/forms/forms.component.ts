@@ -50,19 +50,16 @@ export class FormsComponent implements OnInit {
   get username() {return this.loginForm.get('username'); }
   get password() {return this.loginForm.get('password'); }
 
-  next() {
+  next(el: HTMLElement) {
     this.router.navigate(['angular/routing']);
-    window.scrollTo(0, 0);
+    el.scrollIntoView();
   }
 
-  previous() {
+  previous(el: HTMLElement) {
     this.router.navigate(['angular/pipes']);
-    window.scrollTo(0, 0);
+    el.scrollIntoView();
   }
 
-  top() {
-    window.scrollTo(0, 0);
-  }
 
 }
 

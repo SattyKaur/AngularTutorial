@@ -9,15 +9,25 @@ import {RouteAnimation} from '../../route.animation';
 })
 export class AngularMenuComponent implements OnInit {
 
-  menuToggle = true;
+
+  angularLinks = [
+    {link: 'components-templates', name: 'Components'},
+    {link: 'binding', name: 'Binding'},
+    {link: 'input-properties', name: 'Input & Output'},
+    {link: 'directives', name: 'Directives'},
+    {link: 'services', name: 'Services'},
+    {link: 'pipes', name: 'Pipes'},
+    {link: 'forms', name: 'Forms'},
+    {link: 'routing', name: 'Routing'},
+    {link: 'modules', name: 'Modules'}
+  ];
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  scroll(el: HTMLElement) {
-    el.scrollIntoView();
-  }
+
+
 
 }

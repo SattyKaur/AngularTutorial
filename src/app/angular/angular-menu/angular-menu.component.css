@@ -1,34 +1,39 @@
-.menuButton {
-    font-size: 25px;
-    color: #17a2b8;
-    cursor: pointer;
-}
-
- .pill-1 .nav-link:not(.active) {
-    background-color: linen;
-    color: black;
-     border-style: solid;
-     border-width: 1px;
-     border-color: #17a2b8;
-}
-
- .pill-1 .nav-link {
-    background-color: #17a2b8;
-    opacity: 65%;
-    color: white;
-}
-
-p {
-  color: darkgrey;
-  font-size : 17px;
-  padding : 0;
-  margin : 0;
-  line-height : 23px;
-}
-
 .container{
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
 }
+
+.link {
+  color: grey;
+}
+
+.selected {
+  color: white;
+  background-color: #17a2b8;
+  border: solid 1px #17a2b8;
+  border-radius: 7px;
+}
+
+
+.example-viewport {
+  padding: 10px;
+  height: 860px;
+  width: 1100px;
+  margin-top: 50px;
+}
+
+.content {
+  padding-right: 30px;
+}
+
+a:hover {
+  color: white;
+  background-color: #17a2b8;
+  opacity: 85%;
+  border: solid 1px lightgray;
+  border-radius: 7px;
+}
+
+

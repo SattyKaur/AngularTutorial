@@ -13,19 +13,20 @@ export class ServicesComponent implements OnInit {
   ngOnInit() {
   }
 
-  next() {
+  scroll(el: HTMLElement) {
+    el.scrollIntoView();
+  }
+
+  next(el: HTMLElement) {
     this.router.navigate(['angular/pipes']);
-    window.scrollTo(0, 0);
+    el.scrollIntoView();
   }
 
-  previous() {
+  previous(el: HTMLElement) {
     this.router.navigate(['angular/directives']);
-    window.scrollTo(0, 0);
+    el.scrollIntoView();
   }
 
-  top() {
-    window.scrollTo(0, 0);
-  }
 
 
 }

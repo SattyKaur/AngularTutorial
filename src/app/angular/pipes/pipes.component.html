@@ -1,4 +1,4 @@
-<h2 class="subtitle">Pipes</h2>
+<h2 #top class="subtitle">Pipes</h2>
 <p>Pipes are functions that can be used to format the content of your html elements. To use a Pipe we use '|' inside interpolation. Pipes can make the content more readable. </p>
 
 <!--BUILT IN PIPES-->
@@ -6,7 +6,7 @@
 <h4 class="subtitle">Built in Pipes</h4>
 <p>There are a number of built in Pipes. A pipe can accept any number of optional parameters for further formatting, you can see this in the example below, we specify the
     currency type, the date format, and the number we want to round up to. Parameters are defined after the colon ':'.</p>
-<pre>
+<pre class="col-md-10">
     <em>component.ts</em>
     film = {{'{'}}
       title: 'Interstellar',
@@ -31,7 +31,7 @@
 
 <p>Below we have another example where we toggle the date format by passing in a method from the component as a parameter.</p>
 
-<pre>
+<pre class="col-md-10">
     &lt;div&gt; My Birthday is {{'{{'}}birthday <mark>| date: format</mark>}} &lt;/div&gt;
 
     <em>component.ts</em>
@@ -51,7 +51,7 @@
 <div>
 <h4 class="subtitle">Custom Pipes</h4>
 <p>We will create a custom pipe that can reverse a string input, first enter the following command in the CLI:</p>
-<pre>ng generate pipe reverse</pre>
+<pre class="col-md-10">ng generate pipe reverse</pre>
 <div>This will generate a file that will have the boilerplate code set up. Here are some things to note about a Pipe class:
     <div>
         <ol>
@@ -62,7 +62,7 @@
         </ol>
     </div>
 </div>
-<pre>
+<pre class="col-md-10">
     <em>reverse.pipe.ts</em>
     import {{'{'}}Pipe, PipeTransform } from '@angular/core';
 
@@ -78,7 +78,7 @@ export class ReversePipePipe <mark>implements PipeTransform</mark> {{'{'}}
 </pre>
 
 <p>Inside the transform method we can take the input string value, reverse it and return the string. This method doesn't have any arguments</p>
-<pre>
+<pre class="col-md-10">
      <em>reverse.pipe.ts</em>
     <mark>transform(value: string): string</mark> {{'{'}}
     let newStr: = "";
@@ -102,7 +102,7 @@ export class ReversePipePipe <mark>implements PipeTransform</mark> {{'{'}}
 <p>Here below is a summary pipe which truncates long string. The transform method takes an optional argument; the character limit before truncating.
     We also provide a default value of 50 characters if no argument is provided. </p>
 
-<pre>
+<pre class="col-md-10">
     <em>summary.pipe.ts</em>
     transform(value: string, <mark>limit?: number</mark>) {{'{'}}
     let setLimit = <mark>(limit) ? limit : 50;</mark>
@@ -121,9 +121,9 @@ export class ReversePipePipe <mark>implements PipeTransform</mark> {{'{'}}
 <br>
 <hr>
 
-<button (click)="next()" class="btn btn-outline-info b2">Forms <i class="fa fa-arrow-right"></i></button>
-<button (click)="top()" class="btn btn-outline-info b2"><i class="fa fa-arrow-up"></i></button>
-<button (click)="previous()" class="btn btn-outline-info b2"><i class="fa fa-arrow-left"></i> Services</button>
+<button (click)="next(top)" class="btn btn-outline-info b2">Forms <i class="fa fa-arrow-right"></i></button>
+<button (click)="scroll(top)" class="btn btn-outline-info b2"><i class="fa fa-arrow-up"></i></button>
+<button (click)="previous(top)" class="btn btn-outline-info b2"><i class="fa fa-arrow-left"></i> Services</button>
 
 
 
