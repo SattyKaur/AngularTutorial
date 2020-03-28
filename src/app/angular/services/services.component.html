@@ -1,4 +1,4 @@
-<h2 class="subtitle">Services</h2>
+<h2 #top class="subtitle">Services</h2>
 <p>Services are files that organize and share business logic,
     models, or data and functions. This allows multiple components to use these methods. Generate a new service file with the following command
     in the CLI:
@@ -6,13 +6,13 @@
 
 <!--SERVICES-->
 <div>
-<pre>ng generate service 'book'</pre>
+<pre class="col-md-10">ng generate service 'book'</pre>
 
 <p>A service is decorated with the @Injectable() decorator, this lets Angular know that this is a service that will be used
     for dependency injection. ProvidedIn: 'root' means that we want to declare the service in the root of the application,
     so it can be accessed by any component. Another way to declare the service, is by adding it to the list of providers in the module.ts file</p>
 
-<pre>
+<pre class="col-md-10">
     <em>book.service.ts</em>
     import {{'{'}} Injectable } from 'angular/core';
 
@@ -26,7 +26,7 @@
 
 <p>In here you can create properties or methods you want to share with multiple components. It is common to write asynchronous methods, such as request methods in here.
     The following example is a mock method that returns an array of books, this is a synchronous method.</p>
-<pre>
+<pre class="col-md-10">
     <em>book.service.ts</em>
     getAllBooks(): Book[] {{'{'}}
      return BOOKS;
@@ -35,7 +35,7 @@
 <p>To use a service in a component, inject it into the constructor rather than creating a BookService instance with the new keyword, this is called Dependency Injection.
     Then in the ngOnInit method we can initialize our books[] property by calling the service method.
 </p>
-<pre>
+<pre class="col-md-10">
     <em>component.ts</em>
     books[];
 
@@ -54,7 +54,7 @@
 <p>In a real application you would not be using mock data, you would be getting your data from a remote server. Asynchronous methods allow your application to continue running without it being blocked by a request call.
     Observables is a class from the RxJS library and are used to make asynchronous calls. We can change the getAllBooks method in our book service to return an Observable of type Books[ ]. </p>
 
-<pre>
+<pre class="col-md-10">
     <em>book.service.ts</em>
     getAllBooks(): <mark>Observable&lt;Book[]&gt;</mark> {{'{'}}
     return of (BOOKS);
@@ -64,7 +64,7 @@
     it prevents the UI from freezing or any other functions from being blocked whilst it is fetching the data. We subscribe to the data returned and assign it
 to our local variable books[ ].</p>
 
-<pre>
+<pre class="col-md-10">
      <em>component.ts</em>
     books[];
 
@@ -83,6 +83,6 @@ to our local variable books[ ].</p>
 <br>
 <hr>
 
-<button (click)="next()" class="btn btn-outline-info b2">Pipes <i class="fa fa-arrow-right"></i></button>
-<button (click)="top()" class="btn btn-outline-info b2"><i class="fa fa-arrow-up"></i></button>
-<button (click)="previous()" class="btn btn-outline-info b2"><i class="fa fa-arrow-left"></i> Directives</button>
+<button (click)="next(top)" class="btn btn-outline-info b2">Pipes <i class="fa fa-arrow-right"></i></button>
+<button (click)="scroll(top)" class="btn btn-outline-info b2"><i class="fa fa-arrow-up"></i></button>
+<button (click)="previous(top)" class="btn btn-outline-info b2"><i class="fa fa-arrow-left"></i> Directives</button>

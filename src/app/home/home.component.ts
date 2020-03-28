@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     setTimeout(() => {
       this.router.navigate(['/angular']);
-    }, 1500);
+    }, 2000);
   }
 
 }

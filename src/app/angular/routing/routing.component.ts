@@ -17,18 +17,15 @@ export class RoutingComponent implements OnInit {
     el.scrollIntoView();
   }
 
-  next() {
+  next(el: HTMLElement) {
     this.router.navigate(['angular/modules']);
-    window.scrollTo(0, 0);
+    el.scrollIntoView();
   }
 
-  previous() {
+  previous(el: HTMLElement) {
     this.router.navigate(['angular/forms']);
-    window.scrollTo(0, 0);
+    el.scrollIntoView();
   }
 
-  top() {
-    window.scrollTo(0, 0);
-  }
 
 }

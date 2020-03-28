@@ -1,4 +1,4 @@
-<h2 class="subtitle">Components & Templates</h2>
+<h2 #top class="subtitle">Components & Templates</h2>
 
 <div>
 <p>Components, templates and modules are what make up an Angular app. Every app has at least one, many big applications use hundreds of components
@@ -9,7 +9,7 @@
     a media video, and another for a text body. The separation of components make them reusable and maintainable.
 </p>
 <p>You can create a component in the CLI using the following command followed by the name of the component: </p>
-<pre>
+<pre class="col-md-10">
     ng generate component home
 </pre>
 <p>This will generate 4 files: </p>
@@ -22,7 +22,7 @@
 
 <p>When you create a component need to add it to the list of <mark>declarations</mark> array in the module. (See Modules for more information) </p>
 
-<pre>
+<pre class="col-md-10">
     <em>app.module.ts</em>
     import {{'{'}} HomeComponent } from './home.component';
 
@@ -45,7 +45,7 @@ takes some metadata, here is an example of some of the most common properties.</
     <li><mark>animations: </mark> Here you can add any animations you want for this component.</li>
 </ul>
 
-<pre>
+<pre class="col-md-10">
     <em>home.component.ts</em>
 
     @Component({{'{'}}
@@ -61,7 +61,7 @@ takes some metadata, here is an example of some of the most common properties.</
 
 <h5 class="subtitle">Templates</h5>
 <p>A template contains HTML code linked to its component file. A template is made up of basic HTML elements and also some Angular template syntax like below.</p>
-<pre>
+<pre class="col-md-10">
     <em>home.component.ts</em>
     title = 'Angular Home Page';
 
@@ -72,7 +72,7 @@ takes some metadata, here is an example of some of the most common properties.</
 <p>You can also embed whole templates of other component inside a each other - creating a hierarchical system of templates.
     For example below we have a parent component template (home.component) with a child component inside (content). </p>
 
-<pre>
+<pre class="col-md-10">
     <em>home.component.html</em>
     &lt;h1&gt;Homepage&lt;/h1&gt;
     <mark>&lt;content&gt;&lt;/content&gt;</mark>
@@ -115,8 +115,8 @@ takes some metadata, here is an example of some of the most common properties.</
 <hr>
 <br>
 
-    <button (click)="next()" class="btn btn-outline-info b2">Binding <i class="fa fa-arrow-right"></i></button>
-    <button (click)="top()" class="btn btn-outline-info b2"><i class="fa fa-arrow-up"></i></button>
+    <button (click)="next(top)" class="btn btn-outline-info b2">Binding <i class="fa fa-arrow-right"></i></button>
+    <button (click)="scroll(top)" class="btn btn-outline-info b2"><i class="fa fa-arrow-up"></i></button>
 
 
 

@@ -28,19 +28,21 @@ export class PipesComponent implements OnInit {
   get format()   { return this.toggle ? 'shortDate' : 'fullDate'; }
   toggleFormat() { this.toggle = !this.toggle; }
 
-  next() {
+
+  scroll(el: HTMLElement) {
+    el.scrollIntoView();
+  }
+
+  next(el: HTMLElement) {
     this.router.navigate(['angular/forms']);
-    window.scrollTo(0, 0);
+    el.scrollIntoView();
   }
 
-  previous() {
+  previous(el: HTMLElement) {
     this.router.navigate(['angular/services']);
-    window.scrollTo(0, 0);
+    el.scrollIntoView();
   }
 
-  top() {
-    window.scrollTo(0, 0);
-  }
 
 
 }

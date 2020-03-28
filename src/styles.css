@@ -1,7 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import "~@fortawesome/fontawesome-free/css/all.css";
-@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
 
 .b1 {
   margin-right: 10px;

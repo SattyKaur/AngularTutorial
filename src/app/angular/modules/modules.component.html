@@ -1,4 +1,4 @@
-<h2 class="subtitle">Modules</h2>
+<h2 #top class="subtitle">Modules</h2>
 <p>Angular uses it own modularity system called NgModules. A module is a directory for components and blocks of code that have closely
 related parts. In your module file you can import other modules, export selected functionality for other modules to use.</p>
 <p>An Angular app will have at least one Module, which may be enough for a small app, however it is common for larger apps
@@ -12,7 +12,7 @@ related parts. In your module file you can import other modules, export selected
     <li><mark>bootstrap:</mark> this references the root component of the entire app. Only the root module should have the bootstrap property</li>
 </ul>
 
-<pre>
+<pre class="col-md-10">
     <em>app.module.ts (root module)</em>
 
     @NgModule ({{'{'}}
@@ -37,14 +37,14 @@ related parts. In your module file you can import other modules, export selected
 <p>Feature modules are NgModules that contain code specific for that feature. You are able to use feature modules to better organize your
 project. This helps you keep closely related functions separated from other features.</p>
 <p>You can generate a module in the CLI using the following command (omit 'module' suffix as angular will append it): </p>
-<pre>
+<pre class="col-md-10">
     ng generate module UserProfile
 </pre>
 
 <p>Feature modules look the same as the root module apart from the bootstrap property. Instead of importing BrowserModule, which is only to be imported
 once, import CommonModule. Also notice the export class declaration at the bottom, this exposes this module to the app and other modules.</p>
 <p>If we want to use any components from this feature module in other modules then we need to add them in the export array.</p>
-<pre>
+<pre class="col-md-10">
     <em>user-profile.module.ts</em>
 
     @NgModule ({{'{'}}
@@ -63,7 +63,7 @@ once, import CommonModule. Also notice the export class declaration at the botto
 <p>To add the feature module to your app we need to let the root module know about it, we can do this by importing the module in our root module. **Note if we are lazy-loading
 feature modules we cannot import them in other modules.</p>
 <p>We add our feature module to the imports array like so: </p>
-<pre>
+<pre class="col-md-10">
     <em>app.module.ts (root module)</em>
      declaration: [
             AppComponent,
@@ -96,7 +96,7 @@ load modules as and when they are needed, this can help reduce loading time. </P
     feature module has been removed from the root module imports array it will not load it when the app launches.
     However when user navigates to '/profile' it will then load the feature module.</p>
 
-<pre>
+<pre class="col-md-10">
     <em>app-routing.module.ts</em>
 
     const route: Routes = [
@@ -109,7 +109,7 @@ load modules as and when they are needed, this can help reduce loading time. </P
 
 <p>Inside the UserProfile module we need to use the <mark>RouterModule.forChild()</mark> property instead of 'forRoot'. The first route has an empty path because
 the path in the app-routing.module has already been set to '/profile'. Every route in this module will be a child route under the parent route of '/profile'</p>
-<pre>
+<pre class="col-md-10">
     <em>user-profile.module.ts</em>
      @NgModule ({{'{'}}
         declaration: [
@@ -140,7 +140,7 @@ This downloads our lazy-loaded feature modules behind the scenes before the user
 </ul>
 
 <p>We add the preloading strategy in our app-routing.module.ts file as a second argument to the forRoot() property.</p>
-<pre>
+<pre class="col-md-10">
     <em>app-routing.module.ts</em>
     ...
     RouterModule.forRoot([
@@ -156,7 +156,7 @@ This downloads our lazy-loaded feature modules behind the scenes before the user
 <p>To create our own custom preloading strategy we first create a service called SelectivePreloading which implements the PreloadingStrategy interface,
 here we implement the preload method.</p>
 
-<pre>
+<pre class="col-md-10">
     <em>selective-preloading.service.ts</em>
     @Injectable()
     export class SelectivePreloadingService <mark>implements PreloadingStrategy</mark> {{'{'}}
@@ -168,7 +168,7 @@ here we implement the preload method.</p>
 <p>The preload method takes two parameters; Route and Function, and returns an Observable of type any. Here in our example we
     check if the route configuration has a property called data and if that data property has a value called ‘preload’, if it does then we preload this feature module.
 </p>
-<pre>
+<pre class="col-md-10">
     <em>selective-preloading.service.ts</em>
     preload(route: Route, load: Function): Observable&lt;any&gt; {{'{'}}
         if (<mark>route.data && route.data['preload']</mark>) {{'{'}}
@@ -179,7 +179,7 @@ here we implement the preload method.</p>
 </pre>
 <p>Next in our route configuration we add the data property with the preload value to the modules we want to pre-load.
 We also need to reference the service we created above in the preloadingStrategy property.</p>
-<pre>
+<pre class="col-md-10">
     <em>app-routing.module.ts</em>
     ...
     RouterModule.forRoot([
@@ -195,5 +195,5 @@ We also need to reference the service we created above in the preloadingStrategy
 <br>
 <hr>
 
-<button (click)="top()" class="btn btn-outline-info b2"><i class="fa fa-arrow-up"></i></button>
-<button (click)="previous()" class="btn btn-outline-info b2"><i class="fa fa-arrow-left"></i> Routing</button>
+<button (click)="scroll(top)" class="btn btn-outline-info b2"><i class="fa fa-arrow-up"></i></button>
+<button (click)="previous(top)" class="btn btn-outline-info b2"><i class="fa fa-arrow-left"></i> Routing</button>

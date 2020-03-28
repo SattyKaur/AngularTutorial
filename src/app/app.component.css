@@ -7,3 +7,18 @@
   border-radius: 5px;
   border-width: 1px;
 }
+
+.banner{
+  background-color: #f8f9fa;
+  padding-top: 15px;
+  padding-bottom: 40px;
+}
+
+p {
+  text-align: center;
+  color: darkgrey;
+  font-size : 17px;
+  padding : 0;
+  margin : 0;
+  line-height : 23px;
+}

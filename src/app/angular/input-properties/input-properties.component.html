@@ -1,8 +1,8 @@
-<h2 class="subtitle">Input & Output Properties</h2>
+<h2 #top class="subtitle">Input & Output Properties</h2>
 <p>@Input() and @Output() are both decorators that allow Angular to share data between parent and child components. Input is used to write to, Output returns a value or event that can be observed.
 </p>
 
-<pre>
+<pre class="col-md-10">
 &lt;parent-component&gt;
     &lt;child-component&gt;&lt;/child-component&gt;
 &lt;/parent-component&gt;
@@ -21,7 +21,7 @@
     </div>
     <br>
     <h6>Input Example</h6>
-    <pre>
+    <pre class="col-md-10">
         <em>child.component.ts</em>
     <mark>@Input()</mark> quoteOfTheDay: string;
 
@@ -36,7 +36,7 @@
     </pre>
 
     <p>- You can give the @Input() decorator an alias name inside the parenthesis, you reference this name in the child component selector.</p>
-    <pre>
+    <pre class="col-md-10">
         <em>child.component.ts</em>
      @Input(<mark>'quote'</mark>) quoteOfTheDay: string;
 
@@ -62,7 +62,7 @@
     <h6>Output Example</h6>
     <p>In the child component you should initialize the Output property with an instance of EventEmitter<>() using the new keyword.
     We also have a method to emit the event to the parent. This method is linked to a button in the child html.</p>
-    <pre>
+    <pre class="col-md-10">
         <em>child.component.ts</em>
     <mark>@Output() newTitleEvent: EventEmitter()&lt;string&gt;</mark>;
 
@@ -73,7 +73,7 @@
     </pre>
 
     <p>Here in our child html we have a button which takes the input value and passes it to the method above.</p>
-    <pre>
+    <pre class="col-md-10">
         <em>child.component.html</em>
    &lt;label&gt;Change the Title: &lt;input #newTitle&gt;&lt;/label&gt;
    &lt;button <mark>(click)=&quot;changeTitle(newTitle.value)&quot;</mark>&gt;Change the parents title&lt;/button&gt;
@@ -82,7 +82,7 @@
 
     <p>Inside our parent component we have a method to handle the event passed on from the child component. Inside our child
     selector we reference output property in brackets() and link it to the method in here.</p>
-    <pre>
+    <pre class="col-md-10">
         <em>parent.component.ts</em>
     title: string;
 
@@ -96,13 +96,13 @@
 
 <hr>
 
-<div>
+<div class="col-md-10">
 <parent-component></parent-component>
 </div>
 
 <br>
 <hr>
 
-<button (click)="next()" class="btn btn-outline-info b2">Directives <i class="fa fa-arrow-right"></i></button>
-<button (click)="top()" class="btn btn-outline-info b2"><i class="fa fa-arrow-up"></i></button>
-<button (click)="previous()" class="btn btn-outline-info b2"><i class="fa fa-arrow-left"></i> Binding</button>
+<button (click)="next(top)" class="btn btn-outline-info b2">Directives <i class="fa fa-arrow-right"></i></button>
+<button (click)="scroll(top)" class="btn btn-outline-info b2"><i class="fa fa-arrow-up"></i></button>
+<button (click)="previous(top)" class="btn btn-outline-info b2"><i class="fa fa-arrow-left"></i> Binding</button>
