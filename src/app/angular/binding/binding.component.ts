@@ -34,15 +34,19 @@ export class BindingComponent implements OnInit {
     }
   }
 
-  next(el: HTMLElement) {
-    this.router.navigate(['angular/input-properties']);
-    el.scrollIntoView();
+  next() {
+    this.router.navigate(['/input-properties']);
+    window.scroll(0, 0);
   }
 
 
-  previous(el: HTMLElement) {
-    this.router.navigate(['angular/components-templates']);
-    el.scrollIntoView();
+  previous() {
+    this.router.navigate(['/components']);
+    window.scroll(0, 0);
+  }
+
+  up() {
+    window.scroll(0, 0);
   }
 
 }

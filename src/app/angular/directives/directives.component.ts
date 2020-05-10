@@ -22,14 +22,18 @@ export class DirectivesComponent implements OnInit {
     el.scrollIntoView();
   }
 
-  next(el: HTMLElement) {
-    this.router.navigate(['angular/services']);
-    el.scrollIntoView();
+  up() {
+    window.scroll(0, 0);
   }
 
-  previous(el: HTMLElement) {
-    this.router.navigate(['angular/input-properties']);
-    el.scrollIntoView();
+  next() {
+    this.router.navigate(['/services']);
+    window.scroll(0, 0);
+  }
+
+  previous() {
+    this.router.navigate(['/input-properties']);
+    window.scroll(0, 0);
   }
 
 

@@ -1,0 +1,35 @@
+
+
+.cardInfo {
+  position: relative;
+  width: 100%;
+  overflow: auto;
+  margin-top: 120px;
+}
+
+.cropped {
+  max-width: 100%;
+
+}
+
+.title {
+  color: #f2a035;
+  font-weight: bold;
+  font-size: 30px;
+}
+
+
+.navBt {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.bt {
+  border: 1px solid lightgray;
+  border-radius: 7px;
+  margin: 0 5px 0 5px;
+}
+
+.bt:hover {
+  background-color: whitesmoke;
+}

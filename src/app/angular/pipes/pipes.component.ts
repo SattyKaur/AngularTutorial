@@ -29,18 +29,18 @@ export class PipesComponent implements OnInit {
   toggleFormat() { this.toggle = !this.toggle; }
 
 
-  scroll(el: HTMLElement) {
-    el.scrollIntoView();
+  scroll() {
+    window.scroll(0, 0);
   }
 
-  next(el: HTMLElement) {
-    this.router.navigate(['angular/forms']);
-    el.scrollIntoView();
+  next() {
+    this.router.navigate(['/forms']);
+    window.scroll(0, 0);
   }
 
-  previous(el: HTMLElement) {
-    this.router.navigate(['angular/services']);
-    el.scrollIntoView();
+  previous() {
+    this.router.navigate(['/services']);
+    window.scroll(0, 0);
   }
 
 

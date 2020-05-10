@@ -148,7 +148,7 @@
                 <label for="age">Age</label>
                 <input id="age" name="age" ngModel type="text" required class="form-control">
             </div>
-            <button type="submit" [disabled]="f.invalid" class="btn btn-sm btn-info">Submit</button>
+            <button type="submit" [disabled]="f.invalid" class="btn btn-sm bt">Submit</button>
         </form>
     </div>
 
@@ -268,7 +268,7 @@
             <input id="fName" name="name" ngModel required #name="ngModel" type="text" class="form-control">
             <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">Required</div>
         </div>
-        <button type="submit" [disabled]="f.invalid" class="btn btn-sm btn-info">Submit</button>
+        <button type="submit" [disabled]="f.invalid" class="btn btn-sm bt">Submit</button>
     </form>
 
     <br>
@@ -329,7 +329,7 @@
                 <div *ngIf="password.errors.required">Required</div>
             </div>
         </div>
-        <button type="submit" [disabled]="loginForm.invalid" class="btn btn-sm btn-info">Login</button>
+        <button type="submit" [disabled]="loginForm.invalid" class="btn btn-sm bt">Login</button>
     </form>
 
 </div>
@@ -448,7 +448,7 @@
 <br>
 <hr>
 
-<button (click)="next(top)" class="btn btn-outline-info b2">Routing <i class="fa fa-arrow-right"></i></button>
-<button (click)="scroll(top)" class="btn btn-outline-info b2"><i class="fa fa-arrow-up"></i></button>
-<button (click)="previous(top)" class="btn btn-outline-info b2"><i class="fa fa-arrow-left"></i> Pipes</button>
+<button (click)="next()" class="btn b2">Routing <i class="fa fa-arrow-right"></i></button>
+<button (click)="up()" class="btn b2"><i class="fa fa-arrow-up"></i></button>
+<button (click)="previous()" class="btn b2"><i class="fa fa-arrow-left"></i> Pipes</button>
 
