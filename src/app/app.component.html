@@ -1,14 +1,24 @@
 
-<div class="col-lg-12 box">
-<div [@slideInAnimation]="o.isActivated ? o.activatedRoute : ''">
-  <router-outlet #o = outlet></router-outlet>
+
+
+<div class="menu">
+  <h4 class="menuBrand"><i class="fab fa-angular"></i> Angular Tutorial</h4>
+    <a  class="link" *ngFor="let link of angularLinks"
+        [routerLink]="link.link" (click)="loadComponent(link.link)" routerLinkActive="active">{{link.name}}</a>
+
+
+</div>
+
+<div class="mainContainer">
+
+  <div class="content" [@slideInAnimation]="o.isActivated ? o.activatedRoute : ''">
+    <router-outlet #o = outlet></router-outlet>
   </div>
 </div>
-<hr>
 
-<div class="banner">
+
+<div class="pageFooter">
   <p>Developed by Satty Kaur</p>
   <p>Email: sattyKaur35@gmail.com</p>
   <p><a href="https://github.com/SattyKaur">github.com/SattyKaur</a></p>
 </div>
-

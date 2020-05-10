@@ -14,13 +14,13 @@ export class ComponentTemplatesComponent implements OnInit {
   }
 
 
-  next(el: HTMLElement) {
-    this.router.navigate(['angular/binding']);
-    el.scrollIntoView();
+  next() {
+    this.router.navigate(['/binding']);
+    window.scroll(0, 0);
   }
 
-  scroll(el: HTMLElement) {
-    el.scrollIntoView();
+  scroll() {
+    window.scroll(0, 0);
   }
 
 }

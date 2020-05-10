@@ -1,33 +1,37 @@
-<h2 #top class="subtitle">Components & Templates</h2>
 
-<div>
-<p>Components, templates and modules are what make up an Angular app. Every app has at least one, many big applications use hundreds of components
-    and modules.</p>
-<h5 class="subtitle">What is a component?</h5>
-<p>Components are files that encapsulate data and logic, and displays a view through the HTML for that component. A single view
-    can be made up of several components. E.g. you may have a component for the navigation bar, and a separate one for
-    a media video, and another for a text body. The separation of components make them reusable and maintainable.
-</p>
-<p>You can create a component in the CLI using the following command followed by the name of the component: </p>
-<pre class="col-md-10">
+
+
+<div class="routerContent">
+  <h2 #top class="subtitle">Components & Templates</h2>
+
+  <div>
+    <p>Components, templates and modules are what make up an Angular app. Every app has at least one, many big applications use hundreds of components
+      and modules.</p>
+    <h5 class="subtitle">What is a component?</h5>
+    <p>Components are files that encapsulate data and logic, and displays a view through the HTML for that component. A single view
+      can be made up of several components. E.g. you may have a component for the navigation bar, and a separate one for
+      a media video, and another for a text body. The separation of components make them reusable and maintainable.
+    </p>
+    <p>You can create a component in the CLI using the following command followed by the name of the component: </p>
+    <pre class="col-md-10">
     ng generate component home
 </pre>
-<p>This will generate 4 files: </p>
-<ul>
-    <li><mark>css:</mark> In this file you can add styles you want to apply to this component.</li>
-    <li><mark>ts:</mark> A Typescript file, in here you will perform any logic, functions, store or retrieve the data.</li>
-    <li><mark>html:</mark> In this file you will write all the HTML which can be bounded to data in the typescript file.</li>
-    <li><mark>spec.ts:</mark> This file contains unit tests for your component. </li>
-</ul>
+    <p>This will generate 4 files: </p>
+    <ul>
+      <li><mark>css:</mark> In this file you can add styles you want to apply to this component.</li>
+      <li><mark>ts:</mark> A Typescript file, in here you will perform any logic, functions, store or retrieve the data.</li>
+      <li><mark>html:</mark> In this file you will write all the HTML which can be bounded to data in the typescript file.</li>
+      <li><mark>spec.ts:</mark> This file contains unit tests for your component. </li>
+    </ul>
 
-<p>When you create a component need to add it to the list of <mark>declarations</mark> array in the module. (See Modules for more information) </p>
+    <p>When you create a component need to add it to the list of <mark>declarations</mark> array in the module. (See Modules for more information) </p>
 
-<pre class="col-md-10">
+    <pre class="col-md-10">
     <em>app.module.ts</em>
     import {{'{'}} HomeComponent } from './home.component';
 
     @NgModule ({{'{'}}
-        <mark>declaration: [ HomeComponent ]</mark>,
+      <mark>declaration: [ HomeComponent ]</mark>,
         imports: [  ],
         providers: [ ],
         bootstrap: [ AppComponent ]
@@ -35,21 +39,21 @@
     export class AppModule {{'{'}} }
 </pre>
 
-<p>Inside our component typescript we need to add the <mark>@Component()</mark> decorator. This lets angular know it is a component. The decorator
-takes some metadata, here is an example of some of the most common properties.</p>
-<ul>
-    <li><mark>selector:</mark> This is the tag name that we use to when we want to use the component elsewhere in the application E.g. &lt;home-component&gt;&lt;/home-component&gt;</li>
-    <li><mark>template / templateUrl:</mark> You can add your html here inside the component or reference the html file associated to this component. This is required where as the other properties are not.</li>
-    <li><mark>styles / stylesUrl:</mark> Here you can add any styles or reference a CSS file. It takes an array so you can have multiple CSS files</li>
-    <li><mark>providers:</mark> Here you reference any services your component may use.</li>
-    <li><mark>animations: </mark> Here you can add any animations you want for this component.</li>
-</ul>
+    <p>Inside our component typescript we need to add the <mark>@Component()</mark> decorator. This lets angular know it is a component. The decorator
+      takes some metadata, here is an example of some of the most common properties.</p>
+    <ul>
+      <li><mark>selector:</mark> This is the tag name that we use to when we want to use the component elsewhere in the application E.g. &lt;home-component&gt;&lt;/home-component&gt;</li>
+      <li><mark>template / templateUrl:</mark> You can add your html here inside the component or reference the html file associated to this component. This is required where as the other properties are not.</li>
+      <li><mark>styles / stylesUrl:</mark> Here you can add any styles or reference a CSS file. It takes an array so you can have multiple CSS files</li>
+      <li><mark>providers:</mark> Here you reference any services your component may use.</li>
+      <li><mark>animations: </mark> Here you can add any animations you want for this component.</li>
+    </ul>
 
-<pre class="col-md-10">
+    <pre class="col-md-10">
     <em>home.component.ts</em>
 
     @Component({{'{'}}
-        <mark>selector:</mark> 'home-component',
+      <mark>selector:</mark> 'home-component',
         <mark>templateUrl:</mark> './home.component.html',
         <mark>stylesUrl:</mark> './home.component.css'
     })
@@ -57,11 +61,11 @@ takes some metadata, here is an example of some of the most common properties.</
     export class HomeComponent {{'{'}}  }
 </pre>
 
-<hr>
+    <hr>
 
-<h5 class="subtitle">Templates</h5>
-<p>A template contains HTML code linked to its component file. A template is made up of basic HTML elements and also some Angular template syntax like below.</p>
-<pre class="col-md-10">
+    <h5 class="subtitle">Templates</h5>
+    <p>A template contains HTML code linked to its component file. A template is made up of basic HTML elements and also some Angular template syntax like below.</p>
+    <pre class="col-md-10">
     <em>home.component.ts</em>
     title = 'Angular Home Page';
 
@@ -69,10 +73,10 @@ takes some metadata, here is an example of some of the most common properties.</
     &lt;h1&gt;<mark>{{ "{{ title }\}" }}</mark>&lt;/h1&gt;
 </pre>
 
-<p>You can also embed whole templates of other component inside a each other - creating a hierarchical system of templates.
-    For example below we have a parent component template (home.component) with a child component inside (content). </p>
+    <p>You can also embed whole templates of other component inside a each other - creating a hierarchical system of templates.
+      For example below we have a parent component template (home.component) with a child component inside (content). </p>
 
-<pre class="col-md-10">
+    <pre class="col-md-10">
     <em>home.component.html</em>
     &lt;h1&gt;Homepage&lt;/h1&gt;
     <mark>&lt;content&gt;&lt;/content&gt;</mark>
@@ -81,43 +85,42 @@ takes some metadata, here is an example of some of the most common properties.</
     &lt;p&gt;Welcome to my page....&lt;/p&gt;
 </pre>
 
-</div>
-<hr>
-<br>
+  </div>
+  <hr>
+  <br>
 
-<div>
+  <div>
     <h4 class="subtitle">Life Cycle Hooks</h4>
     <p>Each component has a life cycle, from when it is created, loaded, updated and then destroyed. Developers can tap into any of these
-    life cycles hooks by implementing their interface. Each interface as a method named after the life cycle prefixed with ng. After the component
-    is created, Angular calls the following life cycle hooks in this specific order. </p>
+      life cycles hooks by implementing their interface. Each interface as a method named after the life cycle prefixed with ng. After the component
+      is created, Angular calls the following life cycle hooks in this specific order. </p>
 
     <ul>
-        <li><mark>ngOnChanges</mark></li>
-        <p>Triggered each time there is a change in any input properties</p>
-        <li><mark>ngOnInit</mark></li>
-        <p>Called only once when the component has been initialized. You would initialize any data properties here instead of the constructor</p>
-        <li><mark>ngDoCheck</mark></li>
-        <p>Allows us to detect and act on changes that Angular wont detect on its own</p>
-        <li><mark>ngAfterContentInit</mark></li>
-        <p>Invoked after content projection (ng-content) has been initialized</p>
-        <li><mark>ngAfterContentChecked</mark></li>
-        <p>Each time a change in the content is detected through change detection</p>
-        <li><mark>ngAfterViewInit</mark></li>
-        <p>Invoked when the components view has fully initialized</p>
-        <li><mark>ngAfterViewChecked</mark></li>
-        <p>Invoked each time the view has been checked by change detection</p>
-        <li><mark>ngOnDestroy</mark></li>
-        <p>This method is invoked just before the component is destroyed</p>
+      <li><mark>ngOnChanges</mark></li>
+      <p>Triggered each time there is a change in any input properties</p>
+      <li><mark>ngOnInit</mark></li>
+      <p>Called only once when the component has been initialized. You would initialize any data properties here instead of the constructor</p>
+      <li><mark>ngDoCheck</mark></li>
+      <p>Allows us to detect and act on changes that Angular wont detect on its own</p>
+      <li><mark>ngAfterContentInit</mark></li>
+      <p>Invoked after content projection (ng-content) has been initialized</p>
+      <li><mark>ngAfterContentChecked</mark></li>
+      <p>Each time a change in the content is detected through change detection</p>
+      <li><mark>ngAfterViewInit</mark></li>
+      <p>Invoked when the components view has fully initialized</p>
+      <li><mark>ngAfterViewChecked</mark></li>
+      <p>Invoked each time the view has been checked by change detection</p>
+      <li><mark>ngOnDestroy</mark></li>
+      <p>This method is invoked just before the component is destroyed</p>
 
     </ul>
+  </div>
+
+  <hr>
+  <br>
+
+  <button (click)="next(top)" class="btn b2">Binding <i class="fa fa-arrow-right"></i></button>
+  <button (click)="scroll(top)" class="btn b2"><i class="fa fa-arrow-up"></i></button>
+
 </div>
-
-<hr>
-<br>
-
-    <button (click)="next(top)" class="btn btn-outline-info b2">Binding <i class="fa fa-arrow-right"></i></button>
-    <button (click)="scroll(top)" class="btn btn-outline-info b2"><i class="fa fa-arrow-up"></i></button>
-
-
-
 

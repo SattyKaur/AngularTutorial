@@ -15,9 +15,9 @@
     <p>- Use the @Input() decorator on a property in the child component, that this lets Angular know this property
     can receive its value from the parent component.</p>
     <div>
-        <div class="btn btn-info diagram">Parent</div>
+        <div class="btn diagram">Parent</div>
         <div class="diagram">  ----Data-Flow---->  </div>
-        <div class="btn btn-info diagram">Child</div>
+        <div class="btn diagram">Child</div>
     </div>
     <br>
     <h6>Input Example</h6>
@@ -54,9 +54,9 @@
     <p>Use the @Output() decorator in the child component to pass data from child to parent. The type of data that gets passed back is typically an event such as a
         button click, we use EventEmitters to allow the parent to handle the event.</p>
     <div>
-        <div class="btn btn-info diagram">Parent</div>
+        <div class="btn diagram">Parent</div>
         <div class="diagram">  <----Data-Flow----  </div>
-        <div class="btn btn-info diagram">Child</div>
+        <div class="btn diagram">Child</div>
     </div>
     <br>
     <h6>Output Example</h6>
@@ -103,6 +103,6 @@
 <br>
 <hr>
 
-<button (click)="next(top)" class="btn btn-outline-info b2">Directives <i class="fa fa-arrow-right"></i></button>
-<button (click)="scroll(top)" class="btn btn-outline-info b2"><i class="fa fa-arrow-up"></i></button>
-<button (click)="previous(top)" class="btn btn-outline-info b2"><i class="fa fa-arrow-left"></i> Binding</button>
+<button (click)="next()" class="btn b2">Directives <i class="fa fa-arrow-right"></i></button>
+<button (click)="scroll()" class="btn b2"><i class="fa fa-arrow-up"></i></button>
+<button (click)="previous()" class="btn b2"><i class="fa fa-arrow-left"></i> Binding</button>

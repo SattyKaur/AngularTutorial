@@ -2,42 +2,45 @@
 
 @import "~@fortawesome/fontawesome-free/css/all.css";
 
-.b1 {
-  margin-right: 10px;
-  margin-left: 10px;
+
+button:focus, button:active:focus, button.active:focus {
+  outline: none !important;
 }
+
+.routerContent {
+  height: 100vh;
+}
+
 
 .b2 {
   float: right;
-  margin: 10px;
+  border: 1px solid lightgray;
+  border-radius: 7px;
+  margin: 0 10px 150px 10px;
+}
+
+.b2:hover {
+  background-color: whitesmoke;
+}
+
+.bt {
+  border: 1px solid lightgray;
+  border-radius: 7px;
 }
 
 em {
   float: left; color: #E05C65; padding-left: 10px;
 }
 
-.title {
-  color: #B44C11;
-  font-weight: bold;
-  font-size: 50px;
-  text-align: center;
-}
 
 .subtitle {
-  color: #B44C11;
+  color: #f2a035;
 }
 
 label {
   font-weight: bold;
 }
 
-.box {
-  margin-top: 30px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 30px;
-  width: 90%;
-}
 
 .borderBox {
   border-style: solid;
@@ -47,10 +50,6 @@ label {
   margin-left: 10px;
 }
 
-.router-link-active.router-link-active.router-link-active.router-link-active {
-  color: #B44C11;
-  font-weight: bold;
-}
 
 .clickable {
   cursor: pointer;
@@ -70,20 +69,17 @@ mark {
   font-weight: bold;
 }
 
-.sticky {
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0;
-}
 
 pre {
   padding: 5px;
   border-style: solid;
   border-width: 1px;
-  border-color: #ffaaaa;
-  background-color: #FFFBF9;
+  border-color: lightgray;
+  background-color: #fafafa;
 }
 
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+

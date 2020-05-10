@@ -9,10 +9,8 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatTabsModule} from '@angular/material/tabs';
 
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
 import {PageNotFoundComponent} from './page-not-found.component';
 import {AppRoutingModule} from './app-routing.module';
-import {AngularMenuComponent} from './angular/angular-menu/angular-menu.component';
 import {BindingComponent} from './angular/binding/binding.component';
 import { InputPropertiesComponent } from './angular/input-properties/input-properties.component';
 import {ParentComponent} from './angular/input-properties/parent.component';
@@ -31,6 +29,7 @@ import {FilterPipe} from './angular/pipes/filter.pipe';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatRippleModule} from '@angular/material/core';
+import { HomepageComponent } from './homepage/homepage.component';
 
 
 
@@ -39,9 +38,7 @@ import {MatRippleModule} from '@angular/material/core';
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
     PageNotFoundComponent,
-    AngularMenuComponent,
     BindingComponent,
     InputPropertiesComponent,
     ParentComponent,
@@ -56,7 +53,8 @@ import {MatRippleModule} from '@angular/material/core';
     FormsComponent,
     RoutingComponent,
     ModulesComponent,
-    ComponentTemplatesComponent
+    ComponentTemplatesComponent,
+    HomepageComponent
   ],
   imports: [
     MatRippleModule,

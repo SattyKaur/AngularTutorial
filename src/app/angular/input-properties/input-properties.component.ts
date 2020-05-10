@@ -13,18 +13,19 @@ export class InputPropertiesComponent implements OnInit {
   ngOnInit() {
   }
 
-  next(el: HTMLElement) {
-    this.router.navigate(['angular/directives']);
-    el.scrollIntoView();
+  next() {
+    this.router.navigate(['/directives']);
+    window.scroll(0, 0);
+
   }
 
-  previous(el: HTMLElement) {
-    this.router.navigate(['angular/binding']);
-    el.scrollIntoView();
+  previous() {
+    this.router.navigate(['/binding']);
+    window.scroll(0, 0);
   }
 
-  scroll(el: HTMLElement) {
-    el.scrollIntoView();
+  scroll() {
+    window.scroll(0, 0);
   }
 
 }

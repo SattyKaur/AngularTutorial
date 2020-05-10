@@ -8,7 +8,7 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
     <div class="borderBox col-md-8">
         <h6>Today's Quote is : {{quoteOfTheDay}}</h6>
         <label>Change the Title: <input #newTitle></label>
-        <button class="btn-sm btn-outline-info b1" (click)="changeTitle(newTitle.value)">Change the parents title</button>  
+        <button class="btn-sm" (click)="changeTitle(newTitle.value)">Change the parents title</button>  
     </div>
     </div>
     `
