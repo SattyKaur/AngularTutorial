@@ -30,6 +30,8 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatRippleModule} from '@angular/material/core';
 import { HomepageComponent } from './homepage/homepage.component';
+import { QuizComponent } from './quiz/quiz.component';
+import {MatRadioModule} from '@angular/material/radio';
 
 
 
@@ -54,7 +56,8 @@ import { HomepageComponent } from './homepage/homepage.component';
     RoutingComponent,
     ModulesComponent,
     ComponentTemplatesComponent,
-    HomepageComponent
+    HomepageComponent,
+    QuizComponent
   ],
   imports: [
     MatRippleModule,
@@ -68,7 +71,8 @@ import { HomepageComponent } from './homepage/homepage.component';
     MatButtonModule,
     MatTabsModule,
     ScrollingModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatRadioModule
   ],
   providers: [
     HttpClient,
