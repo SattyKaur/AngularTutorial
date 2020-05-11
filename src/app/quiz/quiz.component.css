@@ -1,0 +1,53 @@
+.blue { color: blue; }
+.orange { color: orange; }
+
+.content {
+  margin-bottom: 200px;
+}
+
+.image {
+  max-width: 100px;
+  float: left;
+  margin-right: 30px;
+}
+
+.score {
+  padding: 20px 0 20px 0;
+}
+
+.questions {
+  padding: 40px 0 40px 0;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+  font-size: 18px;
+}
+
+.mat-radio-outer-circle {
+  border: lightgray 1px solid;
+}
+
+
+.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle{
+  border-color: #f2a035;
+}
+
+.mat-radio-button.mat-accent .mat-radio-inner-circle{
+  color: #f2a035;
+  background-color: #f2a035;
+}
+
+.answers {
+  padding-top: 20px;
+}
+
+.answers p {
+  font-size : 20px;
+  font-weight: bold;
+  padding : 0;
+  margin : 0;
+  line-height: 23px;
+}

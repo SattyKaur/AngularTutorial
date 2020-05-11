@@ -1,0 +1,51 @@
+
+<h1 class="subtitle">Angular Quiz</h1>
+
+<div *ngIf="!clicked">
+  <p>Welcome to the quiz, test your knowledge on Angular fundamentals.
+    There will be 20 questions based on the topics discussed on this web page.</p>
+    <p>You can take the quiz as many times as you like. Good luck!</p>
+  <button (click)="clicked = !clicked" class="btn bt">Start</button>
+</div>
+
+
+
+<div class="score" *ngIf="submitted">
+  <h2>You Scored {{score}} / 20</h2>
+
+  <div *ngIf="score > 15; then wellDone else tryAgain"></div>
+  <ng-template #wellDone>
+    <img class="image" src="../../assets/ribbon.png" alt="">
+    <h4>Well done, you really know your stuff! </h4>
+  </ng-template>
+  <ng-template #tryAgain>
+    <img class="image" src="../../assets/thumbsUp.png" alt="">
+    <h4>Great try, why not refresh your knowledge by going through the tutorial</h4>
+  </ng-template>
+
+  <button (click)="reset()" class="btn bt">Reset</button>
+</div>
+
+
+
+
+<div *ngIf="clicked" class="content">
+  <div class="questions" *ngFor="let x of quizData.data">
+
+    <p>{{x.id}}. {{x.question}}</p>
+    <pre *ngIf="x.code" class="col-md-10">{{x.code}}</pre>
+    <mat-radio-group class="options" aria-label="Select an option">
+      <mat-radio-button value="A" (change)="radioSelect($event, x)">{{x.options.option1}}</mat-radio-button>
+      <mat-radio-button value="B" (change)="radioSelect($event, x)">{{x.options.option2}}</mat-radio-button>
+      <mat-radio-button value="C" (change)="radioSelect($event, x)">{{x.options.option3}}</mat-radio-button>
+    </mat-radio-group>
+
+    <div class="answers" *ngIf="submitted">
+      <p>Correct Answer: {{x.correct}}</p>
+      <p [ngStyle]="answerStyle(x.correct, x.answer)">You Selected: {{x.answer}}</p>
+    </div>
+  </div>
+
+  <button class="btn bt" (click)="saveAnswers()">Submit</button>
+</div>
+

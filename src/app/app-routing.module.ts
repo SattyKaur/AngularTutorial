@@ -11,6 +11,7 @@ import {ServicesComponent} from './angular/services/services.component';
 import {PipesComponent} from './angular/pipes/pipes.component';
 import {FormsComponent} from './angular/forms/forms.component';
 import {ModulesComponent} from './angular/modules/modules.component';
+import {QuizComponent} from './quiz/quiz.component';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import {ModulesComponent} from './angular/modules/modules.component';
       {path: 'forms', component: FormsComponent},
       {path: 'routing', component: RoutingComponent},
       {path: 'modules', component: ModulesComponent},
+      {path: 'quiz', component: QuizComponent},
       {path: '', redirectTo: 'home', pathMatch: 'full'},
       {path: '**', component: PageNotFoundComponent}
     ])

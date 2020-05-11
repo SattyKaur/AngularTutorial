@@ -12,10 +12,10 @@
         <h5 class="title">{{title}}</h5>
         <p class="card-text">As a self taught developer I wanted to solidify and share what I had learnt. I created this web page
         to outline the fundamentals of Angular.</p>
-        <p>After you have gone through the tutorial you can take the quiz to test what you have learnt.</p>
+        <p>After you have gone through the tutorial you can take the quiz to test what you have learnt, or you can go straight there!</p>
         <div class="navBt">
           <button [routerLink]="['/components']" class="btn btn-sm bt">Get Started</button>
-          <button class="btn btn-sm bt">Take the Quiz</button>
+          <button [routerLink]="['/quiz']" class="btn btn-sm bt">Take the Quiz</button>
         </div>
       </div>
     </div>
