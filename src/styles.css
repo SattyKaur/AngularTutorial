@@ -11,12 +11,16 @@ button:focus, button:active:focus, button.active:focus {
   height: 100vh;
 }
 
+.btNav {
+  padding-bottom: 250px;
+}
+
 
 .b2 {
   float: right;
   border: 1px solid lightgray;
   border-radius: 7px;
-  margin: 0 10px 150px 10px;
+  margin: 0 10px 10px 10px;
 }
 
 .b2:hover {
@@ -34,7 +38,7 @@ button:focus, button:active:focus, button.active:focus {
 
 
 em {
-  float: left; color: #E05C65; padding-left: 10px;
+  float: left; color: #4183c4; padding-left: 10px;
 }
 
 

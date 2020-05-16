@@ -71,3 +71,12 @@
 .gitLink {
   color: whitesmoke;
 }
+
+
+@media (max-width: 500px) {
+  .content {
+    width: 90%;
+    margin: 200px auto 0 auto;
+    overflow: scroll;
+  }
+}

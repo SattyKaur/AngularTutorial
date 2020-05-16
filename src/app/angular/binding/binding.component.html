@@ -1,4 +1,4 @@
-<div class="routerContent">
+
   <h2 class="subtitle" #top>Data Binding</h2>
   <div>
     <p>Binding to data from components or styles and attributes to DOM elements.</p>
@@ -140,7 +140,7 @@
           else
               return {{'{'}}colour: 'red'{{ '}'}}
           <em>component.html</em>
-    &lt;div <mark>[ngClass]=&quot;answerStyle()&quot;</mark>&gt;Your answer is: {{"{{answer}\}"}}&lt;/div&gt;
+    &lt;div <mark>[ngStyle]=&quot;answerStyle()&quot;</mark>&gt;Your answer is: {{"{{answer}\}"}}&lt;/div&gt;
         </pre>
         <div [ngStyle]="answerStyle()">Your answer is: {{answer}}</div>
       </li>
@@ -173,12 +173,15 @@
   <br>
 
   <hr>
-  <button (click)="next()" class="btn b2">Input & Output <i class="fa fa-arrow-right"></i></button>
-  <button (click)="up()" class="btn b2"><i class="fa fa-arrow-up"></i></button>
-  <button (click)="previous()" class="btn b2"><i class="fa fa-arrow-left"></i> Components</button>
+  <div class="btNav">
+    <button (click)="next()" class="btn b2">Input & Output <i class="fa fa-arrow-right"></i></button>
+    <button (click)="up()" class="btn b2"><i class="fa fa-arrow-up"></i></button>
+    <button (click)="previous()" class="btn b2"><i class="fa fa-arrow-left"></i> Components</button>
+  </div>
 
 
-</div>
+
+
 
 
 

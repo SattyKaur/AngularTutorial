@@ -198,11 +198,11 @@ export class QuizDataService {
     },
     {
       id: 18,
-      question: 'In a component decorator, what is the selector property?',
+      question: 'In the component decorators metadata, what is the selector property?',
       options: {
-        option1: 'A) An array of any services used in this component',
-        option2: 'B) A reference to the HTML code for this component',
-        option3: 'C) The component tag name when we want to use it in other components'
+        option1: 'A) An array of any services used in the component',
+        option2: 'B) A reference to the CSS used in the component',
+        option3: 'C) A custom HTML tag which references the component.'
       },
       correct: 'C'
     },

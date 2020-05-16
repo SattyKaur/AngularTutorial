@@ -60,11 +60,11 @@
     </div>
     <br>
     <h6>Output Example</h6>
-    <p>In the child component you should initialize the Output property with an instance of EventEmitter<>() using the new keyword.
+    <p>In the child component you should initialize the Output property with an instance of EventEmitter() using the new keyword.
     We also have a method to emit the event to the parent. This method is linked to a button in the child html.</p>
     <pre class="col-md-10">
         <em>child.component.ts</em>
-    <mark>@Output() newTitleEvent: EventEmitter()&lt;string&gt;</mark>;
+    <mark>@Output() newTitleEvent: new EventEmitter()</mark>;
 
 
     changeTitle(value: string) {{'{'}}
@@ -103,6 +103,9 @@
 <br>
 <hr>
 
-<button (click)="next()" class="btn b2">Directives <i class="fa fa-arrow-right"></i></button>
-<button (click)="scroll()" class="btn b2"><i class="fa fa-arrow-up"></i></button>
-<button (click)="previous()" class="btn b2"><i class="fa fa-arrow-left"></i> Binding</button>
+<div class="btNav">
+  <button (click)="next()" class="btn b2">Directives <i class="fa fa-arrow-right"></i></button>
+  <button (click)="scroll()" class="btn b2"><i class="fa fa-arrow-up"></i></button>
+  <button (click)="previous()" class="btn b2"><i class="fa fa-arrow-left"></i> Binding</button>
+</div>
+
