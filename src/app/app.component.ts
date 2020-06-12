@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {RouteAnimation} from './route.animation';
 import {Router} from '@angular/router';
 
@@ -6,7 +6,8 @@ import {Router} from '@angular/router';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  animations: [RouteAnimation.slideAnimation]
+  animations: [RouteAnimation.slideAnimation],
+  encapsulation: ViewEncapsulation.None
 })
 export class AppComponent implements OnInit {
   title = 'Angular Basics';

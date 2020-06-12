@@ -1,0 +1,11 @@
+{
+  "hosting": {
+    "site": "angular-tutorials-sk",
+    "public": "dist/AngularConcepts",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}

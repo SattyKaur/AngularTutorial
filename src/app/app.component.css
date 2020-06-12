@@ -11,6 +11,10 @@
   flex-wrap: wrap;
 }
 
+.burgerMenu {
+  display: none;
+}
+
 
 .link {
   float: right;
@@ -48,7 +52,6 @@
 
 
 .pageFooter{
-  border-top: 1px solid #545454;
   background-color: #545454;
   padding-bottom: 15px;
   padding-top: 10px;
@@ -73,10 +76,105 @@
 }
 
 
-@media (max-width: 500px) {
+@media (max-width: 700px) {
+  .burgerMenu {
+    display: block;
+  }
+
+  .icon {
+    color: #f2a035;
+    font-size: 20px;
+  }
+
+  .fullMenu  {
+    display: none;
+  }
+
+  .link {
+    float: right;
+    padding: 5px 10px 0 10px;
+    text-decoration: none;
+    font-size: 12px;
+    color: black;
+  }
+
+  .link:hover {
+    color: black;
+  }
+
+  .active {
+    border-bottom: 3px solid  #f2a035;
+    color: whitesmoke;
+  }
+
   .content {
     width: 90%;
-    margin: 200px auto 0 auto;
+    margin: 100px auto 0 auto;
     overflow: scroll;
   }
+
+
+
+}
+
+
+@media (max-width: 500px) {
+
+  .burgerMenu {
+    display: block;
+  }
+
+  .fullMenu  {
+    display: none;
+  }
+
+  .content {
+    width: 90%;
+    margin: 100px auto 0 auto;
+    overflow: scroll;
+  }
+
+  .icon {
+    color: #f2a035;
+    font-size: 20px;
+  }
+
+  .active {
+    border-bottom: 3px solid  #f2a035;
+    color: whitesmoke;
+  }
+
+
+  .link {
+    float: right;
+    padding: 5px 10px 0 10px;
+    text-decoration: none;
+    font-size: 12px;
+    color: black;
+  }
+
+  .link:hover {
+    color: black;
+  }
+
+  .pageFooter{
+    background-color: #545454;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    position: fixed;
+    z-index: 2;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+  }
+
+  .pageFooter p {
+    text-align: center;
+    color: whitesmoke;
+    font-size : 14px;
+    padding : 0;
+    margin : 0;
+    line-height : 18px;
+  }
+
 }

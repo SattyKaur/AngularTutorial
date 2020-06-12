@@ -3,11 +3,22 @@
 
 <div class="menu">
   <h4 class="menuBrand"><i class="fab fa-angular"></i> Angular Tutorial</h4>
-    <a  class="link" *ngFor="let link of angularLinks"
-        [routerLink]="link.link" (click)="loadComponent(link.link)" routerLinkActive="active">{{link.name}}</a>
+        <a  class="link fullMenu" *ngFor="let link of angularLinks"
+            [routerLink]="link.link" (click)="loadComponent(link.link)" routerLinkActive="active">{{link.name}}</a>
 
 
+  <div class="burgerMenu">
+    <button mat-button [matMenuTriggerFor]="toggleMenu"><i class="fas fa-bars icon"></i></button>
+    <mat-menu #toggleMenu="matMenu" xPosition="before">
+      <button mat-menu-item class="link" *ngFor="let link of angularLinks"
+          [routerLink]="link.link" (click)="loadComponent(link.link)" routerLinkActive="active">{{link.name}}</button>
+    </mat-menu>
+  </div>
 </div>
+
+
+
+
 
 <div class="mainContainer">
 
