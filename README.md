@@ -1,4 +1,5 @@
 # AngularConcepts
+I created this project to solidify my knowledge of Angular concepts and to provide an easy understandable foundation for people looking to learn Angular. 
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.23.
 
